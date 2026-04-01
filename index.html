@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Safety Work Permits</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Safety Work Permits · TotalEnvironment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg:        #0b0f1a;
-      --surface:   #111827;
-      --card:      #19202f;
-      --border:    #1e2d45;
-      --accent:    #f59e0b;
-      --accent2:   #06b6d4;
-      --danger:    #ef4444;
-      --success:   #22c55e;
-      --warn:      #f97316;
-      --text:      #e2e8f0;
-      --muted:     #64748b;
-      --label:     #94a3b8;
-      --glow:      rgba(245,158,11,0.18);
+      --bg:        #f4f3f0;
+      --surface:   #ffffff;
+      --card:      #ffffff;
+      --border:    #e2ddd8;
+      --border-lt: #ece9e4;
+      --accent:    #1a3a2a;
+      --accent2:   #3d7a57;
+      --gold:      #9a7a3d;
+      --gold-lt:   #f7f2e8;
+      --text:      #1c1c1c;
+      --muted:     #7a7672;
+      --label:     #9a9490;
+      --success:   #2d7d46;
+      --danger:    #c0392b;
+      --warn:      #b97a1a;
+      --info:      #1a5276;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.11);
+      --radius:    12px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,101 +34,100 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Mono', monospace;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── GRID BACKGROUND ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(30,45,69,0.4) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(30,45,69,0.4) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ── HEADER ── */
+    /* ══ HEADER ══ */
     header {
-      position: relative;
-      z-index: 10;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      height: 70px;
+      padding: 0 2.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.4rem 2.5rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(11,15,26,0.85);
-      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-sm);
     }
 
-    .logo-block {
+    .header-left { display: flex; flex-direction: column; gap: 3px; }
+
+    .header-eyebrow {
+      font-size: 0.58rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.8rem;
     }
 
-    .logo-icon {
-      width: 42px; height: 42px;
-      border: 2px solid var(--accent);
-      border-radius: 6px;
-      display: grid;
-      place-items: center;
-      box-shadow: 0 0 18px var(--glow);
-    }
-
-    .logo-icon svg { width: 22px; height: 22px; }
-
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    h1 span { color: var(--accent); }
-
-    .header-meta {
-      font-size: 0.72rem;
+    .sync-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.67rem;
       color: var(--muted);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.04em;
     }
 
     .live-dot {
-      display: inline-block;
       width: 7px; height: 7px;
       border-radius: 50%;
       background: var(--success);
-      margin-right: 6px;
-      animation: pulse 2s infinite;
+      flex-shrink: 0;
+      animation: blink 2.4s infinite;
     }
 
-    @keyframes pulse {
-      0%,100% { opacity: 1; }
-      50%      { opacity: 0.3; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    /* Logo container — refined frame */
+    .logo-frame {
+      display: flex;
+      align-items: center;
+      padding-left: 1.6rem;
+      border-left: 1px solid var(--border-lt);
     }
 
-    /* ── MAIN LAYOUT ── */
+    .company-logo {
+      height: 34px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: grayscale(0%) contrast(1);
+    }
+
+    /* ══ MAIN ══ */
     main {
-      position: relative;
-      z-index: 5;
-      max-width: 1400px;
+      max-width: 1380px;
       margin: 0 auto;
-      padding: 2rem 2rem 4rem;
+      padding: 2rem 2rem 5rem;
     }
 
-    /* ── FILTER PANEL ── */
+    /* ══ FILTER PANEL ══ */
     .filter-panel {
-      background: var(--card);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius);
       padding: 1.6rem 2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
+      box-shadow: var(--shadow-sm);
       display: grid;
       grid-template-columns: 1fr 1fr auto;
       gap: 1.4rem;
@@ -130,571 +136,653 @@
 
     .field label {
       display: block;
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--label);
+      font-weight: 600;
       margin-bottom: 0.5rem;
     }
 
     .field select,
     .field input[type="date"] {
       width: 100%;
-      background: var(--surface);
+      background: var(--bg);
       color: var(--text);
       border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 0.65rem 1rem;
-      font-family: 'DM Mono', monospace;
+      border-radius: 8px;
+      padding: 0.62rem 1rem;
+      font-family: 'Inter', sans-serif;
       font-size: 0.82rem;
       appearance: none;
       cursor: pointer;
-      transition: border-color 0.2s, box-shadow 0.2s;
       outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%239a9490' stroke-width='1.5' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 2.2rem;
     }
 
     .field select:focus,
     .field input[type="date"]:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--glow);
+      border-color: var(--accent2);
+      box-shadow: 0 0 0 3px rgba(61,122,87,0.10);
+      background-color: #fff;
     }
 
-    .field select option { background: var(--surface); }
+    .date-row { display: flex; gap: 0.6rem; align-items: center; }
+    .date-sep { font-size: 0.7rem; color: var(--muted); flex-shrink: 0; }
 
-    .date-range { display: flex; gap: 0.6rem; align-items: center; }
-    .date-range span { color: var(--muted); font-size: 0.75rem; }
+    .filter-actions { display: flex; gap: 0.6rem; }
 
     .btn-apply {
       background: var(--accent);
-      color: #000;
+      color: #fff;
       border: none;
-      border-radius: 7px;
-      padding: 0.7rem 1.6rem;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
+      border-radius: 8px;
+      padding: 0.66rem 1.6rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-      box-shadow: 0 0 20px rgba(245,158,11,0.25);
       white-space: nowrap;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(26,58,42,0.22);
     }
 
-    .btn-apply:hover  { background: #fbbf24; box-shadow: 0 0 28px rgba(245,158,11,0.4); }
-    .btn-apply:active { transform: scale(0.97); }
+    .btn-apply:hover  { background: var(--accent2); box-shadow: 0 4px 14px rgba(26,58,42,0.28); }
+    .btn-apply:active { transform: scale(0.98); }
 
     .btn-reset {
       background: transparent;
       color: var(--muted);
       border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 0.7rem 1.1rem;
-      font-family: 'DM Mono', monospace;
+      border-radius: 8px;
+      padding: 0.66rem 1rem;
+      font-family: 'Inter', sans-serif;
       font-size: 0.78rem;
       cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
+      transition: all 0.2s;
     }
 
-    .btn-reset:hover { color: var(--text); border-color: var(--muted); }
+    .btn-reset:hover { color: var(--text); border-color: var(--muted); background: var(--bg); }
 
-    .filter-actions { display: flex; gap: 0.6rem; align-items: center; }
+    /* ══ STATS ══ */
+    .stats-bar { display: flex; gap: 1rem; margin-bottom: 1.8rem; flex-wrap: wrap; }
 
-    /* ── STATS BAR ── */
-    .stats-bar {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.6rem;
-      flex-wrap: wrap;
-    }
-
-    .stat-chip {
-      background: var(--card);
+    .stat-card {
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.55rem 1.1rem;
-      font-size: 0.75rem;
+      border-radius: var(--radius);
+      padding: 0.9rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.12rem;
+      box-shadow: var(--shadow-sm);
+      min-width: 120px;
+    }
+
+    .stat-card .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-card .lbl {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--label);
+      font-weight: 600;
+    }
+
+    .stat-card.s-open  .num { color: var(--success); }
+    .stat-card.s-info  .num { color: var(--info); }
+    .stat-card.s-warn  .num { color: var(--warn); }
+
+    /* ══ SECTION HEAD ══ */
+    .section-head {
       display: flex;
       align-items: center;
-      gap: 0.55rem;
+      justify-content: space-between;
+      margin-bottom: 1.2rem;
     }
 
-    .stat-chip .num {
-      font-family: 'Syne', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--accent);
-    }
-
-    .stat-chip .lbl { color: var(--muted); letter-spacing: 0.06em; }
-
-    /* ── STATE MESSAGES ── */
-    .state-msg {
-      text-align: center;
-      padding: 4rem 2rem;
+    .section-label {
+      font-size: 0.63rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
       color: var(--muted);
+      font-weight: 600;
     }
 
-    .state-msg svg { width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.3; }
-    .state-msg p  { font-size: 0.85rem; letter-spacing: 0.06em; }
+    .count-badge {
+      background: var(--gold-lt);
+      color: var(--gold);
+      border: 1px solid rgba(154,122,61,0.18);
+      border-radius: 20px;
+      font-size: 0.67rem;
+      font-weight: 600;
+      padding: 0.22rem 0.75rem;
+      letter-spacing: 0.06em;
+    }
 
-    /* ── CARD GRID ── */
+    /* ══ CARD GRID ══ */
     .permits-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 1.1rem;
     }
 
-    /* ── PERMIT CARD ── */
     .permit-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.4rem 1.5rem;
-      position: relative;
+      border-radius: var(--radius);
       overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
-      animation: fadeUp 0.35s ease both;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s;
+      animation: slideUp 0.3s ease both;
+      display: flex;
+      flex-direction: column;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes slideUp {
+      from { opacity:0; transform:translateY(12px); }
+      to   { opacity:1; transform:translateY(0); }
     }
 
     .permit-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 36px rgba(0,0,0,0.45);
-      border-color: rgba(245,158,11,0.35);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: #d0cbc4;
     }
 
-    /* status stripe on left */
-    .permit-card::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 3px;
-      border-radius: 12px 0 0 12px;
-    }
+    /* top colour strip */
+    .card-strip { height: 3px; flex-shrink: 0; }
 
-    .permit-card.status-open::before        { background: var(--success); }
-    .permit-card.status-closed::before      { background: var(--muted); }
-    .permit-card.status-inprogress::before  { background: var(--accent2); }
-    .permit-card.status-expired::before     { background: var(--danger); }
-    .permit-card.status-pending::before     { background: var(--warn); }
-    .permit-card.status-other::before       { background: var(--border); }
+    .strip-open       { background: linear-gradient(90deg,#2d7d46,#52b070); }
+    .strip-inprogress { background: linear-gradient(90deg,#1a5276,#2e86c1); }
+    .strip-closed     { background: linear-gradient(90deg,#7a7672,#a0a098); }
+    .strip-expired    { background: linear-gradient(90deg,#c0392b,#e74c3c); }
+    .strip-pending    { background: linear-gradient(90deg,#b97a1a,#e0a030); }
+    .strip-other      { background: linear-gradient(90deg,#9a7a3d,#c4a060); }
+
+    .card-inner {
+      padding: 1.3rem 1.5rem 1.4rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
     /* card header */
     .card-head {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 1rem;
       gap: 0.8rem;
+      margin-bottom: 1.1rem;
     }
+
+    .card-head-left { flex: 1; min-width: 0; }
 
     .card-id {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.63rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.98rem;
+      font-weight: 600;
       color: var(--accent);
-      letter-spacing: 0.1em;
-      padding: 0.25rem 0.6rem;
-      background: rgba(245,158,11,0.1);
-      border-radius: 4px;
-      border: 1px solid rgba(245,158,11,0.2);
-      flex-shrink: 0;
-    }
-
-    .card-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
       line-height: 1.35;
-      flex: 1;
     }
 
-    .status-badge {
-      font-size: 0.65rem;
+    /* badge */
+    .badge {
+      font-size: 0.6rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 0.25rem 0.65rem;
-      border-radius: 20px;
+      padding: 0.26rem 0.72rem;
+      border-radius: 30px;
       font-weight: 600;
       flex-shrink: 0;
+      white-space: nowrap;
     }
 
-    .badge-open        { background: rgba(34,197,94,0.15);  color: var(--success); border: 1px solid rgba(34,197,94,0.25); }
-    .badge-closed      { background: rgba(100,116,139,0.15); color: var(--muted);   border: 1px solid rgba(100,116,139,0.25);}
-    .badge-inprogress  { background: rgba(6,182,212,0.15);  color: var(--accent2); border: 1px solid rgba(6,182,212,0.25); }
-    .badge-expired     { background: rgba(239,68,68,0.15);  color: var(--danger);  border: 1px solid rgba(239,68,68,0.25); }
-    .badge-pending     { background: rgba(249,115,22,0.15); color: var(--warn);    border: 1px solid rgba(249,115,22,0.25);}
-    .badge-other       { background: rgba(30,45,69,0.5);    color: var(--label);   border: 1px solid var(--border); }
+    .badge-open       { background:#eaf5ee; color:#2d7d46; border:1px solid #b8ddc4; }
+    .badge-inprogress { background:#e8f2fa; color:#1a5276; border:1px solid #aecce8; }
+    .badge-closed     { background:#f0efee; color:#5a5754; border:1px solid #d0ceca; }
+    .badge-expired    { background:#fdecea; color:#c0392b; border:1px solid #f0b9b5; }
+    .badge-pending    { background:#fdf4e7; color:#b97a1a; border:1px solid #e8d098; }
+    .badge-other      { background:#faf8f5; color:#7a7672; border:1px solid #e2ddd8; }
 
-    /* card body grid */
-    .card-body {
+    /* info grid */
+    .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.7rem 1rem;
-    }
-
-    .info-item {}
-
-    .info-item .key {
-      font-size: 0.62rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.2rem;
-    }
-
-    .info-item .val {
-      font-size: 0.8rem;
-      color: var(--text);
-      word-break: break-word;
+      gap: 0.8rem 1.2rem;
+      flex: 1;
     }
 
     .info-item.full { grid-column: 1 / -1; }
 
-    /* divider */
-    .card-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 1rem 0;
+    .info-key {
+      font-size: 0.58rem;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--label);
+      font-weight: 600;
+      margin-bottom: 0.18rem;
     }
 
+    .info-val {
+      font-size: 0.79rem;
+      color: var(--text);
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    /* divider */
+    .card-divider { height: 1px; background: var(--border-lt); margin: 1rem 0; }
+
+    /* footer */
     .card-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 0.8rem;
       flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
-    .worker-count {
+    .footer-pill {
       display: flex;
       align-items: center;
       gap: 0.4rem;
-      font-size: 0.75rem;
-      color: var(--label);
-    }
-
-    .worker-count svg { width: 14px; height: 14px; }
-    .worker-count strong { color: var(--text); font-family: 'Syne', sans-serif; }
-
-    .raised-by {
-      font-size: 0.72rem;
+      font-size: 0.71rem;
       color: var(--muted);
     }
 
-    .raised-by span { color: var(--accent2); }
+    .footer-pill svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .footer-pill strong { color: var(--text); font-weight: 600; }
 
-    /* ── LOADING ── */
-    .loader {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      padding: 4rem;
+    .raised-tag {
+      font-size: 0.67rem;
       color: var(--muted);
+      background: var(--bg);
+      border: 1px solid var(--border-lt);
+      border-radius: 20px;
+      padding: 0.2rem 0.72rem;
     }
 
-    .spinner {
-      width: 36px; height: 36px;
-      border: 3px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
+    .raised-tag span { color: var(--accent2); font-weight: 500; }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    /* ══ STATES ══ */
+    .state-msg { text-align:center; padding:5rem 2rem; color:var(--muted); }
+    .state-msg svg { width:44px; height:44px; margin-bottom:1rem; opacity:0.3; }
+    .state-msg p { font-size:0.82rem; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 700px) {
-      .filter-panel { grid-template-columns: 1fr; }
-      header { padding: 1rem 1.2rem; }
-      main   { padding: 1.2rem 1rem 3rem; }
-      .permits-grid { grid-template-columns: 1fr; }
+    .loader { display:flex; flex-direction:column; align-items:center; gap:1rem; padding:5rem; color:var(--muted); font-size:0.82rem; }
+    .spinner { width:30px; height:30px; border:3px solid var(--border); border-top-color:var(--accent2); border-radius:50%; animation:spin 0.75s linear infinite; }
+    @keyframes spin { to{transform:rotate(360deg)} }
+
+    /* ══ RESPONSIVE ══ */
+    @media (max-width:760px) {
+      header { padding:0 1.2rem; }
+      main   { padding:1.2rem 1rem 3rem; }
+      .filter-panel { grid-template-columns:1fr; }
+      .permits-grid { grid-template-columns:1fr; }
+      .date-row { flex-direction:column; }
+      .company-logo { height:28px; }
     }
   </style>
 </head>
 <body>
 
+<!-- ════ HEADER ════ -->
 <header>
-  <div class="logo-block">
-    <div class="logo-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        <polyline points="9 12 11 14 15 10"/>
-      </svg>
+  <div class="header-left">
+    <div class="header-eyebrow">EHS Management · Work Permit System</div>
+    <div class="header-title">Safety Work Permits</div>
+  </div>
+
+  <div class="header-right">
+    <div class="sync-pill">
+      <span class="live-dot"></span>
+      <span id="syncText">Loading data…</span>
     </div>
-    <div>
-      <h1>Safety <span>Work Permits</span></h1>
-      <div class="header-meta" id="lastSync">Connecting to data source…</div>
+
+    <div class="logo-frame">
+      <img
+        class="company-logo"
+        src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADcApUDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3iiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiuc8fSSw+ANekgd0mWxlKNGSGB2nkEd6AOjor4j/tzxH/0FdV/8CJP8aDrviIDJ1XVAB3+0Sf40AfbmaM18QDxHrxOBrWo8/8AT0/+NP8A7c8R/wDQU1X/AMCJP8aAPtulr4rsdb8RHULYNqmqFTKuQbiT1HvX2oOlABRRRQAUUVh+IvF+heE1t31u/FotwWEWY2bcVxn7oPqKANyisHw74y0HxYbgaJfi7+zbfNxGy7d2cfeA9D+Vb1ABRRRQAUUUUAFFFfFOo+ItcXVLpV1nUAomcAC6fj5j70Afa1Gaq6YxbSbNmJLGBCST1+UV84+MF17XfjffeH9N1q5tPtEyrH/pDrGmIgx4U+xoA+mM0ZrwP/hTPj7/AKHJf/Aqf/Cj/hTPj7/ocl/8Cp/8KAPfKK8D/wCFM+Pf+hyX/wACp/8ACvcdNt5bTS7S2nk8yaGFI3fJO5goBPPqaALdFFFABRRRQAUUUUAFFFFABRQa8c+GFh4ptviNr82sQ6mmnuk32drov5ZPmgjbnjp6dqAPY6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoorIv/E2iaXqUOm3+p2tteThTFBLIFdwxKjA9yCKANeiiigAooooAKKKKACi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"
+        alt="TotalEnvironment"
+      />
     </div>
   </div>
-  <div class="header-meta" id="liveStatus"></div>
 </header>
 
+<!-- ════ MAIN ════ -->
 <main>
+
   <!-- FILTER PANEL -->
   <div class="filter-panel">
     <div class="field">
       <label>Project</label>
       <select id="filterProject">
-        <option value="">— All Projects —</option>
+        <option value="">All Projects</option>
       </select>
     </div>
+
     <div class="field">
       <label>Date Range (Start Date)</label>
-      <div class="date-range">
-        <input type="date" id="dateFrom" />
-        <span>to</span>
-        <input type="date" id="dateTo" />
+      <div class="date-row">
+        <input type="date" id="dateFrom" style="flex:1"/>
+        <span class="date-sep">to</span>
+        <input type="date" id="dateTo"   style="flex:1"/>
       </div>
     </div>
+
     <div class="filter-actions">
-      <button class="btn-apply" onclick="applyFilters()">Apply</button>
-      <button class="btn-reset" onclick="resetFilters()">Reset</button>
+      <button class="btn-apply" onclick="applyFilters()">Apply Filters</button>
+      <button class="btn-reset" onclick="resetFilters()">Clear</button>
     </div>
   </div>
 
   <!-- STATS BAR -->
   <div class="stats-bar" id="statsBar" style="display:none">
-    <div class="stat-chip"><span class="num" id="statTotal">0</span><span class="lbl">Total Permits</span></div>
-    <div class="stat-chip"><span class="num" id="statWorkers">0</span><span class="lbl">Workers On-Site</span></div>
-    <div class="stat-chip"><span class="num" id="statOpen">0</span><span class="lbl">Open</span></div>
-    <div class="stat-chip"><span class="num" id="statInprog">0</span><span class="lbl">In Progress</span></div>
+    <div class="stat-card">
+      <div class="num" id="statTotal">0</div>
+      <div class="lbl">Total Permits</div>
+    </div>
+    <div class="stat-card s-info">
+      <div class="num" id="statWorkers">0</div>
+      <div class="lbl">Workers On-Site</div>
+    </div>
+    <div class="stat-card s-open">
+      <div class="num" id="statOpen">0</div>
+      <div class="lbl">Open</div>
+    </div>
+    <div class="stat-card s-warn">
+      <div class="num" id="statInprog">0</div>
+      <div class="lbl">In Progress</div>
+    </div>
   </div>
 
-  <!-- RESULTS AREA -->
-  <div id="resultsArea">
-    <div class="loader"><div class="spinner"></div><span>Loading permit data…</span></div>
+  <!-- SECTION HEAD -->
+  <div class="section-head" id="sectionHead" style="display:none">
+    <span class="section-label">Work Permit Records</span>
+    <span class="count-badge" id="countBadge">0 Results</span>
   </div>
+
+  <!-- RESULTS -->
+  <div id="resultsArea">
+    <div class="loader">
+      <div class="spinner"></div>
+      <span>Fetching permit records…</span>
+    </div>
+  </div>
+
 </main>
 
 <script>
-  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0DM28N6v5VcvqZ2mZWWDoEACvKUhwU3sC9ec_8Owm16L9Oxx84MVLr3MHeXP3Gk4eL_aj4LJbEEu8/pub?output=csv';
+const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0DM28N6v5VcvqZ2mZWWDoEACvKUhwU3sC9ec_8Owm16L9Oxx84MVLr3MHeXP3Gk4eL_aj4LJbEEu8/pub?output=csv';
 
-  let allRows = [];
+// 0-based column indices
+// A=0 B=1 C=2 D=3 E=4 F=5 G=6 H=7 I=8 J=9 K=10 L=11 ... Q=16
+const COL = {
+  name:0, id:1, project:2, tower:3, unit:5,
+  start:6, status:7, workers:8, desc:9, raised:11, end:16
+};
 
-  /* ── CSV PARSER (handles quoted fields) ── */
-  function parseCSV(text) {
-    const lines = text.split(/\r?\n/);
-    return lines.map(line => {
-      const cols = [];
-      let cur = '', inQ = false;
-      for (let i = 0; i < line.length; i++) {
-        const c = line[i];
-        if (c === '"') {
-          if (inQ && line[i+1] === '"') { cur += '"'; i++; }
-          else inQ = !inQ;
-        } else if (c === ',' && !inQ) {
-          cols.push(cur.trim()); cur = '';
-        } else { cur += c; }
-      }
-      cols.push(cur.trim());
-      return cols;
+let allRows = [];
+
+/* ── Robust RFC-4180 CSV parser ─────────────────── */
+function parseCSV(text) {
+  const out = [];
+  const lines = text.split(/\r?\n/);
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const cols = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') {
+        if (inQ && line[i+1] === '"') { cur += '"'; i++; }
+        else inQ = !inQ;
+      } else if (c === ',' && !inQ) {
+        cols.push(cur.trim()); cur = '';
+      } else cur += c;
+    }
+    cols.push(cur.trim());
+    out.push(cols);
+  }
+  return out;
+}
+
+/* ── Fetch & boot ───────────────────────────────── */
+async function loadData() {
+  try {
+    const res = await fetch(CSV_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    const rows = parseCSV(text);
+
+    // Row index 0 = header row — skip it
+    // Keep only rows with a real Permit ID in col B (index 1)
+    allRows = rows.slice(1).filter(r => {
+      if (!r || r.length < 3) return false;
+      const id = (r[COL.id] || '').trim();
+      return id.length > 0;
     });
-  }
 
-  /* ── COLUMN INDICES (0-based) ── */
-  // A=0 B=1 C=2 D=3 F=5 G=6 H=7 I=8 J=9 L=11 Q=16
-  const COL = { name:0, id:1, project:2, tower:3, unit:5, start:6, status:7, workers:8, desc:9, raised:11, end:16 };
-
-  /* ── LOAD DATA ── */
-  async function loadData() {
-    try {
-      const res = await fetch(CSV_URL);
-      if (!res.ok) throw new Error('Network error');
-      const text = await res.text();
-      const rows = parseCSV(text);
-
-      // Skip header row (first row)
-      allRows = rows.slice(1).filter(r => r.length > 5 && r[COL.id]);
-
-      populateProjectFilter();
-      document.getElementById('lastSync').innerHTML =
-        `<span class="live-dot"></span> Synced · ${new Date().toLocaleTimeString()}`;
-      document.getElementById('liveStatus').textContent =
-        `${allRows.length} records loaded`;
-
-      renderCards(allRows);
-    } catch (e) {
-      document.getElementById('resultsArea').innerHTML = `
-        <div class="state-msg">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          <p>Unable to load data. Check that the Google Sheet is published to web.</p>
-          <p style="margin-top:0.5rem;font-size:0.7rem;">${e.message}</p>
-        </div>`;
-    }
-  }
-
-  /* ── POPULATE PROJECT DROPDOWN ── */
-  function populateProjectFilter() {
-    const sel = document.getElementById('filterProject');
-    const projects = [...new Set(allRows.map(r => r[COL.project]).filter(Boolean))].sort();
-    projects.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p; opt.textContent = p;
-      sel.appendChild(opt);
-    });
-  }
-
-  /* ── PARSE DATE from column G ── */
-  function parseDate(val) {
-    if (!val) return null;
-    // Try DD/MM/YYYY, YYYY-MM-DD, or MM/DD/YYYY
-    let m;
-    if ((m = val.match(/^(\d{2})\/(\d{2})\/(\d{4})/))) return new Date(`${m[3]}-${m[2]}-${m[1]}`);
-    if ((m = val.match(/^(\d{4})-(\d{2})-(\d{2})/)))   return new Date(val);
-    if ((m = val.match(/^(\d{2})-(\d{2})-(\d{4})/)))   return new Date(`${m[3]}-${m[2]}-${m[1]}`);
-    return new Date(val);
-  }
-
-  /* ── APPLY FILTERS ── */
-  function applyFilters() {
-    const proj  = document.getElementById('filterProject').value;
-    const from  = document.getElementById('dateFrom').value;
-    const to    = document.getElementById('dateTo').value;
-
-    let filtered = allRows;
-
-    if (proj) {
-      filtered = filtered.filter(r => r[COL.project] === proj);
-    }
-
-    if (from || to) {
-      filtered = filtered.filter(r => {
-        const d = parseDate(r[COL.start]);
-        if (!d || isNaN(d)) return true;
-        if (from && d < new Date(from)) return false;
-        if (to   && d > new Date(to + 'T23:59:59')) return false;
-        return true;
-      });
-    }
-
-    renderCards(filtered);
-  }
-
-  function resetFilters() {
-    document.getElementById('filterProject').value = '';
-    document.getElementById('dateFrom').value = '';
-    document.getElementById('dateTo').value = '';
+    populateProjectFilter();
     renderCards(allRows);
+
+    const t = new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+    document.getElementById('syncText').textContent = `Synced ${t} · ${allRows.length} records`;
+  } catch(e) {
+    document.getElementById('resultsArea').innerHTML = `
+      <div class="state-msg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p>Could not load permit data. Ensure the Google Sheet is published to the web as CSV.</p>
+        <p style="margin-top:0.4rem;font-size:0.68rem;color:var(--label)">${e.message}</p>
+      </div>`;
+    document.getElementById('syncText').textContent = 'Connection error';
+  }
+}
+
+/* ── Populate project dropdown ──────────────────── */
+function populateProjectFilter() {
+  const sel = document.getElementById('filterProject');
+  // Clear all options except the first placeholder
+  while (sel.options.length > 1) sel.remove(1);
+
+  const seen = new Set();
+  for (const r of allRows) {
+    const raw = (r[COL.project] || '').trim();
+    if (!raw) continue;
+    // Skip if it looks like a day name, time value, or column header
+    if (/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)/i.test(raw)) continue;
+    if (/^\d{1,2}[:/]\d{2}/.test(raw)) continue;
+    if (/^project/i.test(raw)) continue;
+    seen.add(raw);
   }
 
-  /* ── STATUS CLASS ── */
-  function statusClass(s) {
-    if (!s) return 'other';
-    const l = s.toLowerCase();
-    if (l.includes('open'))        return 'open';
-    if (l.includes('progress'))    return 'inprogress';
-    if (l.includes('close'))       return 'closed';
-    if (l.includes('expir'))       return 'expired';
-    if (l.includes('pend'))        return 'pending';
-    return 'other';
+  const sorted = [...seen].sort((a,b) => a.localeCompare(b));
+  for (const p of sorted) {
+    const opt = document.createElement('option');
+    opt.value = p; opt.textContent = p;
+    sel.appendChild(opt);
+  }
+}
+
+/* ── Date parser ────────────────────────────────── */
+function parseDate(val) {
+  if (!val) return null;
+  val = val.trim();
+  let m;
+  if ((m = val.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/)))
+    return new Date(`${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`);
+  if ((m = val.match(/^(\d{4})-(\d{2})-(\d{2})/)))
+    return new Date(val.substring(0,10));
+  return new Date(val);
+}
+
+/* ── Apply / reset filters ──────────────────────── */
+function applyFilters() {
+  const proj = document.getElementById('filterProject').value;
+  const from = document.getElementById('dateFrom').value;
+  const to   = document.getElementById('dateTo').value;
+
+  let rows = allRows;
+  if (proj) rows = rows.filter(r => (r[COL.project]||'').trim() === proj);
+  if (from || to) {
+    rows = rows.filter(r => {
+      const d = parseDate(r[COL.start]);
+      if (!d || isNaN(d.getTime())) return true;
+      if (from && d < new Date(from))              return false;
+      if (to   && d > new Date(to+'T23:59:59'))   return false;
+      return true;
+    });
+  }
+  renderCards(rows);
+}
+
+function resetFilters() {
+  document.getElementById('filterProject').value = '';
+  document.getElementById('dateFrom').value = '';
+  document.getElementById('dateTo').value   = '';
+  renderCards(allRows);
+}
+
+/* ── Status helpers ─────────────────────────────── */
+function statusKey(s) {
+  if (!s) return 'other';
+  const l = s.toLowerCase();
+  if (l.includes('open'))     return 'open';
+  if (l.includes('progress')) return 'inprogress';
+  if (l.includes('clos'))     return 'closed';
+  if (l.includes('expir'))    return 'expired';
+  if (l.includes('pend'))     return 'pending';
+  return 'other';
+}
+
+/* ── Render cards ───────────────────────────────── */
+function renderCards(rows) {
+  const area    = document.getElementById('resultsArea');
+  const statsEl = document.getElementById('statsBar');
+  const secHead = document.getElementById('sectionHead');
+  const countEl = document.getElementById('countBadge');
+
+  if (!rows.length) {
+    statsEl.style.display = 'none';
+    secHead.style.display = 'none';
+    area.innerHTML = `
+      <div class="state-msg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p>No permits match your filters. Try adjusting the project or date range.</p>
+      </div>`;
+    return;
   }
 
-  function badgeClass(s) { return 'badge-' + statusClass(s); }
-  function cardClass(s)  { return 'status-' + statusClass(s); }
+  // Stats
+  const totalW   = rows.reduce((s,r) => s + (parseInt(r[COL.workers])||0), 0);
+  const openN    = rows.filter(r => statusKey(r[COL.status]) === 'open').length;
+  const inprogN  = rows.filter(r => statusKey(r[COL.status]) === 'inprogress').length;
 
-  /* ── RENDER CARDS ── */
-  function renderCards(rows) {
-    const area = document.getElementById('resultsArea');
-    const statsBar = document.getElementById('statsBar');
+  document.getElementById('statTotal').textContent   = rows.length;
+  document.getElementById('statWorkers').textContent = totalW;
+  document.getElementById('statOpen').textContent    = openN;
+  document.getElementById('statInprog').textContent  = inprogN;
+  statsEl.style.display = 'flex';
+  secHead.style.display = 'flex';
+  countEl.textContent   = `${rows.length} Result${rows.length !== 1 ? 's' : ''}`;
 
-    if (!rows.length) {
-      statsBar.style.display = 'none';
-      area.innerHTML = `
-        <div class="state-msg">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <p>No permits match your filters. Try adjusting the project or date range.</p>
-        </div>`;
-      return;
-    }
-
-    // Stats
-    const totalWorkers = rows.reduce((s,r) => s + (parseInt(r[COL.workers])||0), 0);
-    const openCount    = rows.filter(r => statusClass(r[COL.status]) === 'open').length;
-    const inprogCount  = rows.filter(r => statusClass(r[COL.status]) === 'inprogress').length;
-
-    document.getElementById('statTotal').textContent   = rows.length;
-    document.getElementById('statWorkers').textContent = totalWorkers;
-    document.getElementById('statOpen').textContent    = openCount;
-    document.getElementById('statInprog').textContent  = inprogCount;
-    statsBar.style.display = 'flex';
-
-    const html = rows.map((r, i) => {
-      const sc = statusClass(r[COL.status]);
-      const bc = badgeClass(r[COL.status]);
-      const status = r[COL.status] || 'Unknown';
-      const delay  = Math.min(i * 0.04, 0.6);
-
-      return `
-      <div class="permit-card ${cardClass(r[COL.status])}" style="animation-delay:${delay}s">
+  const html = rows.map((r,i) => {
+    const sk    = statusKey(r[COL.status]);
+    const delay = Math.min(i * 0.03, 0.5).toFixed(2);
+    return `
+    <div class="permit-card" style="animation-delay:${delay}s">
+      <div class="card-strip strip-${sk}"></div>
+      <div class="card-inner">
         <div class="card-head">
-          <span class="card-id">${esc(r[COL.id])}</span>
-          <div class="card-title">${esc(r[COL.name])}</div>
-          <span class="status-badge ${bc}">${esc(status)}</span>
+          <div class="card-head-left">
+            <div class="card-id">${esc(r[COL.id])}</div>
+            <div class="card-name">${esc(r[COL.name]) || '—'}</div>
+          </div>
+          <span class="badge badge-${sk}">${esc(r[COL.status]) || 'Unknown'}</span>
         </div>
 
-        <div class="card-body">
+        <div class="info-grid">
           <div class="info-item">
-            <div class="key">Project</div>
-            <div class="val">${esc(r[COL.project]) || '—'}</div>
+            <div class="info-key">Project</div>
+            <div class="info-val">${esc(r[COL.project]) || '—'}</div>
           </div>
           <div class="info-item">
-            <div class="key">Tower / Phase</div>
-            <div class="val">${esc(r[COL.tower]) || '—'}</div>
+            <div class="info-key">Tower / Phase</div>
+            <div class="info-val">${esc(r[COL.tower]) || '—'}</div>
           </div>
           <div class="info-item">
-            <div class="key">Unit No.</div>
-            <div class="val">${esc(r[COL.unit]) || '—'}</div>
+            <div class="info-key">Unit No.</div>
+            <div class="info-val">${esc(r[COL.unit]) || '—'}</div>
           </div>
           <div class="info-item">
-            <div class="key">No. of Workers</div>
-            <div class="val">${esc(r[COL.workers]) || '—'}</div>
+            <div class="info-key">No. of Workers</div>
+            <div class="info-val">${esc(r[COL.workers]) || '—'}</div>
           </div>
           <div class="info-item">
-            <div class="key">Start Time</div>
-            <div class="val">${esc(r[COL.start]) || '—'}</div>
+            <div class="info-key">Start Time</div>
+            <div class="info-val">${esc(r[COL.start]) || '—'}</div>
           </div>
           <div class="info-item">
-            <div class="key">End Time</div>
-            <div class="val">${esc(r[COL.end]) || '—'}</div>
+            <div class="info-key">End Time</div>
+            <div class="info-val">${esc(r[COL.end]) || '—'}</div>
           </div>
           <div class="info-item full">
-            <div class="key">Work Description</div>
-            <div class="val">${esc(r[COL.desc]) || '—'}</div>
+            <div class="info-key">Work Description</div>
+            <div class="info-val">${esc(r[COL.desc]) || '—'}</div>
           </div>
         </div>
 
         <div class="card-divider"></div>
 
         <div class="card-footer">
-          <div class="worker-count">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            <strong>${esc(r[COL.workers]) || '0'}</strong> workers
+          <div class="footer-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <strong>${esc(r[COL.workers]) || '0'}</strong>&nbsp;workers
           </div>
-          <div class="raised-by">Raised by <span>${esc(r[COL.raised]) || 'Unknown'}</span></div>
+          <span class="raised-tag">Raised by <span>${esc(r[COL.raised]) || 'N/A'}</span></span>
         </div>
-      </div>`;
-    }).join('');
+      </div>
+    </div>`;
+  }).join('');
 
-    area.innerHTML = `<div class="permits-grid">${html}</div>`;
-  }
+  area.innerHTML = `<div class="permits-grid">${html}</div>`;
+}
 
-  function esc(s) {
-    if (!s) return '';
-    return String(s)
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;');
-  }
+function esc(s) {
+  if (!s) return '';
+  return String(s)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
 
-  /* ── BOOT ── */
-  loadData();
+loadData();
 </script>
 </body>
 </html>
