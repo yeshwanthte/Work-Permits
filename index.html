@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Safety Work Permits</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:        #0b0f1a;
+      --surface:   #111827;
+      --card:      #19202f;
+      --border:    #1e2d45;
+      --accent:    #f59e0b;
+      --accent2:   #06b6d4;
+      --danger:    #ef4444;
+      --success:   #22c55e;
+      --warn:      #f97316;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --label:     #94a3b8;
+      --glow:      rgba(245,158,11,0.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── GRID BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(30,45,69,0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(30,45,69,0.4) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(11,15,26,0.85);
+      backdrop-filter: blur(10px);
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-icon {
+      width: 42px; height: 42px;
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 0 18px var(--glow);
+    }
+
+    .logo-icon svg { width: 22px; height: 22px; }
+
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    h1 span { color: var(--accent); }
+
+    .header-meta {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .live-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.3; }
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      position: relative;
+      z-index: 5;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+
+    /* ── FILTER PANEL ── */
+    .filter-panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.6rem 2rem;
+      margin-bottom: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 1.4rem;
+      align-items: end;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--label);
+      margin-bottom: 0.5rem;
+    }
+
+    .field select,
+    .field input[type="date"] {
+      width: 100%;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 0.65rem 1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      appearance: none;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .field select:focus,
+    .field input[type="date"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--glow);
+    }
+
+    .field select option { background: var(--surface); }
+
+    .date-range { display: flex; gap: 0.6rem; align-items: center; }
+    .date-range span { color: var(--muted); font-size: 0.75rem; }
+
+    .btn-apply {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 7px;
+      padding: 0.7rem 1.6rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 0 20px rgba(245,158,11,0.25);
+      white-space: nowrap;
+    }
+
+    .btn-apply:hover  { background: #fbbf24; box-shadow: 0 0 28px rgba(245,158,11,0.4); }
+    .btn-apply:active { transform: scale(0.97); }
+
+    .btn-reset {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      padding: 0.7rem 1.1rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-reset:hover { color: var(--text); border-color: var(--muted); }
+
+    .filter-actions { display: flex; gap: 0.6rem; align-items: center; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.6rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .stat-chip .num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--accent);
+    }
+
+    .stat-chip .lbl { color: var(--muted); letter-spacing: 0.06em; }
+
+    /* ── STATE MESSAGES ── */
+    .state-msg {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+
+    .state-msg svg { width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.3; }
+    .state-msg p  { font-size: 0.85rem; letter-spacing: 0.06em; }
+
+    /* ── CARD GRID ── */
+    .permits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.2rem;
+    }
+
+    /* ── PERMIT CARD ── */
+    .permit-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      animation: fadeUp 0.35s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .permit-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.45);
+      border-color: rgba(245,158,11,0.35);
+    }
+
+    /* status stripe on left */
+    .permit-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      border-radius: 12px 0 0 12px;
+    }
+
+    .permit-card.status-open::before        { background: var(--success); }
+    .permit-card.status-closed::before      { background: var(--muted); }
+    .permit-card.status-inprogress::before  { background: var(--accent2); }
+    .permit-card.status-expired::before     { background: var(--danger); }
+    .permit-card.status-pending::before     { background: var(--warn); }
+    .permit-card.status-other::before       { background: var(--border); }
+
+    /* card header */
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 0.8rem;
+    }
+
+    .card-id {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      background: rgba(245,158,11,0.1);
+      border-radius: 4px;
+      border: 1px solid rgba(245,158,11,0.2);
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      flex: 1;
+    }
+
+    .status-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 20px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .badge-open        { background: rgba(34,197,94,0.15);  color: var(--success); border: 1px solid rgba(34,197,94,0.25); }
+    .badge-closed      { background: rgba(100,116,139,0.15); color: var(--muted);   border: 1px solid rgba(100,116,139,0.25);}
+    .badge-inprogress  { background: rgba(6,182,212,0.15);  color: var(--accent2); border: 1px solid rgba(6,182,212,0.25); }
+    .badge-expired     { background: rgba(239,68,68,0.15);  color: var(--danger);  border: 1px solid rgba(239,68,68,0.25); }
+    .badge-pending     { background: rgba(249,115,22,0.15); color: var(--warn);    border: 1px solid rgba(249,115,22,0.25);}
+    .badge-other       { background: rgba(30,45,69,0.5);    color: var(--label);   border: 1px solid var(--border); }
+
+    /* card body grid */
+    .card-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem 1rem;
+    }
+
+    .info-item {}
+
+    .info-item .key {
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .info-item .val {
+      font-size: 0.8rem;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .info-item.full { grid-column: 1 / -1; }
+
+    /* divider */
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 1rem 0;
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .worker-count {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      color: var(--label);
+    }
+
+    .worker-count svg { width: 14px; height: 14px; }
+    .worker-count strong { color: var(--text); font-family: 'Syne', sans-serif; }
+
+    .raised-by {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    .raised-by span { color: var(--accent2); }
+
+    /* ── LOADING ── */
+    .loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding: 4rem;
+      color: var(--muted);
+    }
+
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .filter-panel { grid-template-columns: 1fr; }
+      header { padding: 1rem 1.2rem; }
+      main   { padding: 1.2rem 1rem 3rem; }
+      .permits-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo-block">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <polyline points="9 12 11 14 15 10"/>
+      </svg>
+    </div>
+    <div>
+      <h1>Safety <span>Work Permits</span></h1>
+      <div class="header-meta" id="lastSync">Connecting to data source…</div>
+    </div>
+  </div>
+  <div class="header-meta" id="liveStatus"></div>
+</header>
+
+<main>
+  <!-- FILTER PANEL -->
+  <div class="filter-panel">
+    <div class="field">
+      <label>Project</label>
+      <select id="filterProject">
+        <option value="">— All Projects —</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Date Range (Start Date)</label>
+      <div class="date-range">
+        <input type="date" id="dateFrom" />
+        <span>to</span>
+        <input type="date" id="dateTo" />
+      </div>
+    </div>
+    <div class="filter-actions">
+      <button class="btn-apply" onclick="applyFilters()">Apply</button>
+      <button class="btn-reset" onclick="resetFilters()">Reset</button>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar" id="statsBar" style="display:none">
+    <div class="stat-chip"><span class="num" id="statTotal">0</span><span class="lbl">Total Permits</span></div>
+    <div class="stat-chip"><span class="num" id="statWorkers">0</span><span class="lbl">Workers On-Site</span></div>
+    <div class="stat-chip"><span class="num" id="statOpen">0</span><span class="lbl">Open</span></div>
+    <div class="stat-chip"><span class="num" id="statInprog">0</span><span class="lbl">In Progress</span></div>
+  </div>
+
+  <!-- RESULTS AREA -->
+  <div id="resultsArea">
+    <div class="loader"><div class="spinner"></div><span>Loading permit data…</span></div>
+  </div>
+</main>
+
+<script>
+  const CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0DM28N6v5VcvqZ2mZWWDoEACvKUhwU3sC9ec_8Owm16L9Oxx84MVLr3MHeXP3Gk4eL_aj4LJbEEu8/pub?output=csv';
+
+  let allRows = [];
+
+  /* ── CSV PARSER (handles quoted fields) ── */
+  function parseCSV(text) {
+    const lines = text.split(/\r?\n/);
+    return lines.map(line => {
+      const cols = [];
+      let cur = '', inQ = false;
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') {
+          if (inQ && line[i+1] === '"') { cur += '"'; i++; }
+          else inQ = !inQ;
+        } else if (c === ',' && !inQ) {
+          cols.push(cur.trim()); cur = '';
+        } else { cur += c; }
+      }
+      cols.push(cur.trim());
+      return cols;
+    });
+  }
+
+  /* ── COLUMN INDICES (0-based) ── */
+  // A=0 B=1 C=2 D=3 F=5 G=6 H=7 I=8 J=9 L=11 Q=16
+  const COL = { name:0, id:1, project:2, tower:3, unit:5, start:6, status:7, workers:8, desc:9, raised:11, end:16 };
+
+  /* ── LOAD DATA ── */
+  async function loadData() {
+    try {
+      const res = await fetch(CSV_URL);
+      if (!res.ok) throw new Error('Network error');
+      const text = await res.text();
+      const rows = parseCSV(text);
+
+      // Skip header row (first row)
+      allRows = rows.slice(1).filter(r => r.length > 5 && r[COL.id]);
+
+      populateProjectFilter();
+      document.getElementById('lastSync').innerHTML =
+        `<span class="live-dot"></span> Synced · ${new Date().toLocaleTimeString()}`;
+      document.getElementById('liveStatus').textContent =
+        `${allRows.length} records loaded`;
+
+      renderCards(allRows);
+    } catch (e) {
+      document.getElementById('resultsArea').innerHTML = `
+        <div class="state-msg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <p>Unable to load data. Check that the Google Sheet is published to web.</p>
+          <p style="margin-top:0.5rem;font-size:0.7rem;">${e.message}</p>
+        </div>`;
+    }
+  }
+
+  /* ── POPULATE PROJECT DROPDOWN ── */
+  function populateProjectFilter() {
+    const sel = document.getElementById('filterProject');
+    const projects = [...new Set(allRows.map(r => r[COL.project]).filter(Boolean))].sort();
+    projects.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p; opt.textContent = p;
+      sel.appendChild(opt);
+    });
+  }
+
+  /* ── PARSE DATE from column G ── */
+  function parseDate(val) {
+    if (!val) return null;
+    // Try DD/MM/YYYY, YYYY-MM-DD, or MM/DD/YYYY
+    let m;
+    if ((m = val.match(/^(\d{2})\/(\d{2})\/(\d{4})/))) return new Date(`${m[3]}-${m[2]}-${m[1]}`);
+    if ((m = val.match(/^(\d{4})-(\d{2})-(\d{2})/)))   return new Date(val);
+    if ((m = val.match(/^(\d{2})-(\d{2})-(\d{4})/)))   return new Date(`${m[3]}-${m[2]}-${m[1]}`);
+    return new Date(val);
+  }
+
+  /* ── APPLY FILTERS ── */
+  function applyFilters() {
+    const proj  = document.getElementById('filterProject').value;
+    const from  = document.getElementById('dateFrom').value;
+    const to    = document.getElementById('dateTo').value;
+
+    let filtered = allRows;
+
+    if (proj) {
+      filtered = filtered.filter(r => r[COL.project] === proj);
+    }
+
+    if (from || to) {
+      filtered = filtered.filter(r => {
+        const d = parseDate(r[COL.start]);
+        if (!d || isNaN(d)) return true;
+        if (from && d < new Date(from)) return false;
+        if (to   && d > new Date(to + 'T23:59:59')) return false;
+        return true;
+      });
+    }
+
+    renderCards(filtered);
+  }
+
+  function resetFilters() {
+    document.getElementById('filterProject').value = '';
+    document.getElementById('dateFrom').value = '';
+    document.getElementById('dateTo').value = '';
+    renderCards(allRows);
+  }
+
+  /* ── STATUS CLASS ── */
+  function statusClass(s) {
+    if (!s) return 'other';
+    const l = s.toLowerCase();
+    if (l.includes('open'))        return 'open';
+    if (l.includes('progress'))    return 'inprogress';
+    if (l.includes('close'))       return 'closed';
+    if (l.includes('expir'))       return 'expired';
+    if (l.includes('pend'))        return 'pending';
+    return 'other';
+  }
+
+  function badgeClass(s) { return 'badge-' + statusClass(s); }
+  function cardClass(s)  { return 'status-' + statusClass(s); }
+
+  /* ── RENDER CARDS ── */
+  function renderCards(rows) {
+    const area = document.getElementById('resultsArea');
+    const statsBar = document.getElementById('statsBar');
+
+    if (!rows.length) {
+      statsBar.style.display = 'none';
+      area.innerHTML = `
+        <div class="state-msg">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <p>No permits match your filters. Try adjusting the project or date range.</p>
+        </div>`;
+      return;
+    }
+
+    // Stats
+    const totalWorkers = rows.reduce((s,r) => s + (parseInt(r[COL.workers])||0), 0);
+    const openCount    = rows.filter(r => statusClass(r[COL.status]) === 'open').length;
+    const inprogCount  = rows.filter(r => statusClass(r[COL.status]) === 'inprogress').length;
+
+    document.getElementById('statTotal').textContent   = rows.length;
+    document.getElementById('statWorkers').textContent = totalWorkers;
+    document.getElementById('statOpen').textContent    = openCount;
+    document.getElementById('statInprog').textContent  = inprogCount;
+    statsBar.style.display = 'flex';
+
+    const html = rows.map((r, i) => {
+      const sc = statusClass(r[COL.status]);
+      const bc = badgeClass(r[COL.status]);
+      const status = r[COL.status] || 'Unknown';
+      const delay  = Math.min(i * 0.04, 0.6);
+
+      return `
+      <div class="permit-card ${cardClass(r[COL.status])}" style="animation-delay:${delay}s">
+        <div class="card-head">
+          <span class="card-id">${esc(r[COL.id])}</span>
+          <div class="card-title">${esc(r[COL.name])}</div>
+          <span class="status-badge ${bc}">${esc(status)}</span>
+        </div>
+
+        <div class="card-body">
+          <div class="info-item">
+            <div class="key">Project</div>
+            <div class="val">${esc(r[COL.project]) || '—'}</div>
+          </div>
+          <div class="info-item">
+            <div class="key">Tower / Phase</div>
+            <div class="val">${esc(r[COL.tower]) || '—'}</div>
+          </div>
+          <div class="info-item">
+            <div class="key">Unit No.</div>
+            <div class="val">${esc(r[COL.unit]) || '—'}</div>
+          </div>
+          <div class="info-item">
+            <div class="key">No. of Workers</div>
+            <div class="val">${esc(r[COL.workers]) || '—'}</div>
+          </div>
+          <div class="info-item">
+            <div class="key">Start Time</div>
+            <div class="val">${esc(r[COL.start]) || '—'}</div>
+          </div>
+          <div class="info-item">
+            <div class="key">End Time</div>
+            <div class="val">${esc(r[COL.end]) || '—'}</div>
+          </div>
+          <div class="info-item full">
+            <div class="key">Work Description</div>
+            <div class="val">${esc(r[COL.desc]) || '—'}</div>
+          </div>
+        </div>
+
+        <div class="card-divider"></div>
+
+        <div class="card-footer">
+          <div class="worker-count">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <strong>${esc(r[COL.workers]) || '0'}</strong> workers
+          </div>
+          <div class="raised-by">Raised by <span>${esc(r[COL.raised]) || 'Unknown'}</span></div>
+        </div>
+      </div>`;
+    }).join('');
+
+    area.innerHTML = `<div class="permits-grid">${html}</div>`;
+  }
+
+  function esc(s) {
+    if (!s) return '';
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+  /* ── BOOT ── */
+  loadData();
+</script>
+</body>
+</html>
