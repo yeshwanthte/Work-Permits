@@ -10,8 +10,6 @@
   --bg:#f2f0ec;--surface:#fff;--border:#e0dbd4;--border2:#ece8e2;
   --accent:#1b3a2b;--green:#2d7a47;--gold:#8a6d35;--gold-bg:#f7f0e4;
   --text:#1a1a1a;--sub:#5a5652;--label:#9a9490;
-  --c-open:#2d7a47;--c-prog:#1a4f7a;--c-close:#6b6560;
-  --c-exp:#b83030;--c-pend:#a06010;--c-oth:#7a7470;
   --r:10px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -33,7 +31,20 @@ header{
 .dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:blink 2.5s infinite;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .logo-divider{width:1px;height:36px;background:var(--border2);flex-shrink:0}
-.logo-img{height:32px;width:auto;display:block;object-fit:contain}
+
+/* Logo — white background, clean rendering */
+.logo-wrap{
+  height:40px;padding:4px 10px;
+  background:#fff;border:1px solid var(--border2);border-radius:6px;
+  display:flex;align-items:center;
+}
+.logo-img{
+  height:32px;width:auto;
+  display:block;
+  object-fit:contain;
+  image-rendering:-webkit-optimize-contrast;
+  image-rendering:crisp-edges;
+}
 
 /* ── MAIN ── */
 main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
@@ -57,18 +68,20 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath fill='none' stroke='%239a9490' stroke-width='1.5' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;
 }
-.field select:focus,.field input[type=date]:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(45,122,71,.1);background:#fff}
+.field select:focus,.field input[type=date]:focus{
+  border-color:var(--green);box-shadow:0 0 0 3px rgba(45,122,71,.1);background:#fff
+}
 .date-row{display:flex;gap:8px;align-items:center}
 .date-sep{font-size:11px;color:var(--label);flex-shrink:0}
-.field-date{flex:1;min-width:180px}
+.field-date{flex:1;min-width:200px}
 .filter-btns{display:flex;gap:8px;align-items:center;flex-shrink:0}
 .btn-apply{
   background:var(--accent);color:#fff;border:none;border-radius:7px;
-  padding:9px 18px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
+  padding:9px 20px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
   letter-spacing:.07em;text-transform:uppercase;cursor:pointer;white-space:nowrap;
-  box-shadow:0 2px 8px rgba(27,58,43,.22);transition:background .15s,box-shadow .15s;
+  box-shadow:0 2px 8px rgba(27,58,43,.22);transition:background .15s;
 }
-.btn-apply:hover{background:#2d5e3f;box-shadow:0 4px 12px rgba(27,58,43,.28)}
+.btn-apply:hover{background:#2d5e3f}
 .btn-apply:active{transform:scale(.98)}
 .btn-reset{
   background:transparent;color:var(--sub);border:1px solid var(--border);
@@ -77,51 +90,46 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 }
 .btn-reset:hover{color:var(--text);border-color:var(--sub);background:var(--bg)}
 
-/* debug date info */
-#dateDebug{font-size:11px;color:var(--sub);margin-bottom:12px;padding:8px 12px;background:#fff;border:1px solid var(--border2);border-radius:6px;display:none}
+/* ── PLACEHOLDER (shown before filter apply) ── */
+.placeholder{
+  text-align:center;padding:80px 20px;color:var(--sub);
+}
+.placeholder svg{width:52px;height:52px;margin-bottom:16px;opacity:.2}
+.placeholder h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--accent);margin-bottom:8px;font-weight:600}
+.placeholder p{font-size:13px;color:var(--label);max-width:340px;margin:0 auto;line-height:1.6}
 
 /* ── STATS ── */
 .stats-bar{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
 .stat{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px 18px;min-width:110px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .stat .num{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--accent);line-height:1}
 .stat .lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:600;margin-top:2px}
-.stat.s-open .num{color:var(--c-open)}
-.stat.s-info .num{color:var(--c-prog)}
-.stat.s-warn .num{color:var(--c-pend)}
+.stat.s-open .num{color:#2d7a47}
+.stat.s-info .num{color:#1a4f7a}
+.stat.s-warn .num{color:#a06010}
 
 /* ── SECTION HEAD ── */
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .sec-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sub);font-weight:600}
-.count-badge{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(138,109,53,.18);border-radius:20px;font-size:11px;font-weight:600;padding:3px 11px;letter-spacing:.05em}
+.count-badge{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(138,109,53,.18);border-radius:20px;font-size:11px;font-weight:600;padding:3px 11px}
 
 /* ── GRID ── */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:14px}
 
 /* ── CARD ── */
-.card{
-  background:#fff;border:1px solid var(--border);border-radius:var(--r);
-  overflow:hidden;display:flex;flex-direction:column;
-  box-shadow:0 1px 4px rgba(0,0,0,.05);
-  transition:transform .18s ease,box-shadow .18s ease;
-  will-change:transform;
-}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 4px rgba(0,0,0,.05);transition:transform .18s,box-shadow .18s;will-change:transform}
 .card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.1)}
 .strip{height:3px;flex-shrink:0}
-.s-open   {background:linear-gradient(90deg,#2d7a47,#4caf70)}
-.s-prog   {background:linear-gradient(90deg,#1a4f7a,#2e7bbf)}
-.s-close  {background:linear-gradient(90deg,#6b6560,#a09a94)}
-.s-exp    {background:linear-gradient(90deg,#b83030,#e05050)}
-.s-pend   {background:linear-gradient(90deg,#a06010,#d4880a)}
-.s-oth    {background:linear-gradient(90deg,#8a6d35,#c4a060)}
+.s-open  {background:linear-gradient(90deg,#2d7a47,#4caf70)}
+.s-prog  {background:linear-gradient(90deg,#1a4f7a,#2e7bbf)}
+.s-close {background:linear-gradient(90deg,#6b6560,#a09a94)}
+.s-exp   {background:linear-gradient(90deg,#b83030,#e05050)}
+.s-pend  {background:linear-gradient(90deg,#a06010,#d4880a)}
+.s-oth   {background:linear-gradient(90deg,#8a6d35,#c4a060)}
 .card-body{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column}
-
-/* card head */
 .c-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}
 .c-head-left{flex:1;min-width:0}
 .c-id{font-size:10px;color:var(--gold);letter-spacing:.12em;font-weight:600;text-transform:uppercase;margin-bottom:4px}
 .c-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--accent);line-height:1.35}
-
-/* badge */
 .badge{font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:3px 10px;border-radius:20px;font-weight:600;flex-shrink:0;white-space:nowrap}
 .b-open {background:#eaf5ee;color:#2d7a47;border:1px solid #b8ddc4}
 .b-prog {background:#e6f0fa;color:#1a4f7a;border:1px solid #aacce8}
@@ -129,8 +137,6 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 .b-exp  {background:#fdeaea;color:#b83030;border:1px solid #f0b8b8}
 .b-pend {background:#fdf3e4;color:#a06010;border:1px solid #e8d098}
 .b-oth  {background:#f6f4f2;color:#7a7470;border:1px solid #e0dbd4}
-
-/* info rows */
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 16px;flex:1}
 .info-full{grid-column:1/-1}
 .ik{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--label);font-weight:600;margin-bottom:2px}
@@ -152,7 +158,8 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 @media(max-width:700px){
-  header{padding:0 16px;height:56px}
+  header{padding:0 14px;height:56px}
+  .hd-title{font-size:16px}
   main{padding:14px 12px 40px}
   .filter-panel{flex-direction:column}
   .grid{grid-template-columns:1fr}
@@ -173,8 +180,11 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
       <span id="syncTxt">Loading…</span>
     </div>
     <div class="logo-divider"></div>
-    <img class="logo-img" alt="TotalEnvironment"
-      src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADcApUDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3iiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiuc8fSSw+ANekgd0mWxlKNGSGB2nkEd6AOjor4j/tzxH/0FdV/8CJP8aDrviIDJ1XVAB3+0Sf40AfbmaM18QDxHrxOBrWo8/8AT0/+NP8A7c8R/wDQU1X/AMCJP8aAPtulr4rsdb8RHULYNqmqFTKuQbiT1HvX2oOlABRRRQAUUVh+IvF+heE1t31u/FotwWEWY2bcVxn7oPqKANyisHw74y0HxYbgaJfi7+zbfNxGy7d2cfeA9D+Vb1ABRRRQAUUUUAFFFfFOo+ItcXVLpV1nUAomcAC6fj5j70Afa1Gaq6YxbSbNmJLGBCST1+UV84+MF17XfjffeH9N1q5tPtEyrH/pDrGmIgx4U+xoA+mM0ZrwP/hTPj7/AKHJf/Aqf/Cj/hTPj7/ocl/8Cp/8KAPfKK8D/wCFM+Pf+hyX/wACp/8ACvcdNt5bTS7S2nk8yaGFI3fJO5goBPPqaALdFFFABRRRQAUUUUAFFFFABRQa8c+GFh4ptviNr82sQ6mmnuk32drov5ZPmgjbnjp6dqAPY6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoorIv/E2iaXqUOm3+p2tteThTFBLIFdwxKjA9yCKANeiiigAooooAKKKKACi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"/>
+    <!-- TotalEnvironment logo – PNG embedded as base64 for crisp rendering -->
+    <div class="logo-wrap">
+      <img class="logo-img" alt="TotalEnvironment"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAApUAAADcCAIAAACu+819AACMBklEQVR42u39d7hV1dX+D+/e+z690rtIEaWIgigoFkAUDXZsMdE8KlEUaySxoBFEBU1ii5Kggg1UAoodGwLSpQicXvbZvdf3j8+X+Z6fce+AIQ+YZ95XrlzHwz5rrzXXnKPeYwxlPB5XSEhISEhISPysoJJLICEhISEhIfW3hISEhISEhNTfEhISEhISElJ/S0hISEhISP0tISEhISEhIfW3hISEhISEhNTfEhISEhISUn9LSEhISEhISP0tISEhISEhIfW3hISEhISE1N8SEhISEhISRwia//QXKJXKQ/p8Nps9LNeROLzvJR9yuZxcTAkJCQnpf0tISEhISEhI/S0hISEhIfHfiP94/FzGV49OyPciISEhIf1vCQkJCQkJCel/S/x8/G/JK5SQkJCQ/reEhISEhISE1N8SEhISEhL/pcgbP9fr9V6vV6vVmkymZDIZj8c1Gs3zzz9vs9l+9POZTEalUimVylwul8lkFAqFWq1Wq9XZbDabzeZyOZVKpVarlUplNpvNZDL54q4qlSqXy6XTaZPJlEqlcrlcOBweNGjQkCFDlAcgPnwYg/O5XC6XSyUSCbvdHo/HtVptIpEwGo3JZJLbViqV8XicD/Obo+pFfvvtt2vXri0rK0smk+l0OpfLqdVqlUrVq1ev4cOHRyIRjUajUqlYXl5We3v7ihUrDAaD0WjMZDI8Ke/ukNbtR3/fpUuXUaNGKZVKjUYTDAZVKpXRaIxGozqd7md9YMR758HF4+/bt+/jjz82GAw6nU6pVJ5zzjlarVapVKbTaSllJH52iMfjCBC9Xp9MJkOhUElJSWtrq8PhOLoUmEYTj8cNBgM3bDAYYrEYmkilUqF9NBqNRqNJp9ORSESn02UymWw2a7PZvF6vwWDI5XIGgyHfOU0mk3q9Pp1Oc7VkMmkwGDQajVqtjkajrE8wGNy5c2ddXV08HjeZTB6PR6fT9e3bt1u3bgaDAdGHdI1GozabjeugE7VaLeIa+ZzJZNB6Gs1Bpbbzfohv0mg0sViMB/7ss89mzZqVSqXy+vIqlUqlQpdns1lWEBWey+WUSmVn/V2gTwv622g0ptNp1v34449fvXr1fzYQoVJptVpWELGLRlepVCjyVCplMBiSyaTRaEwkEkfbebv33ntXr15ttVpjsRirjXb529/+hkZXq9WpVErZCdu2bXvwwQcbGhp45Gw2q9Vq1Wr1YdHfV199de/evTUaDdfEbjCbzQX2z88aX3/99Y033pjL5eLx+JgxY84666xAIGCxWKQmkPg5wmq1KhSKVCqVTCZ1Op3Vak2lUnq9/mi7z0Qiga4xm83hcLihoUGpVBYXFwtFk06nU6mURqNRKpU6nS6bzVoslkQi4fP5XC6XQqEIhUJerzefX6rRaBKJhNVqjUajLEswGLTZbJFIZMuWLcuXL//HP/7R1NSkVCpDoVAoFBLer16v12g0NTU1p5122rhx40455ZR4PG42m5ubmysqKtRqdTgcdrlc4XBYrVbncrloNMod6vV64QP/dP2N3cErNJvNFovFbDbHYrF8dkFn5xhhncvlhPPNEqfTaZa1sH3BRVh6jUZjMBjsdvt/eh+kUimMj3A4rNPpUIEYGWhuPsCysKePqn1ss9nUanU8Ho/H4yqVSqPRsH19Pl8qlWJbJJPJbDaLmcWGbmhoSKfTOp3OaDQSdRAxhn8T7e3t5eXlGIImkykajWIXH6Rd+bNDMBiMxWJOpzMej4fDYQxzvV5/FJp6EhIHs5/1ej2yWq1W6/V6n89nt9sPNT73n0Y6nTabzfF4PJvN6nS6qqoqggedFQ0KSK1WExsLhUImkwkBXl9fb7PZiouL851TXOfGxkaUfTKZVKlUzz333NNPP71nzx6fz2cymaxWaygUUiqVRUVFmUwmHo8nEgku6PP5tm/f/tRTT1mt1nnz5o0aNaqsrMzr9QrTgbVVKBT4yejNg1/kvMLUYrGk02ncfGycdDqNe5fPD0NbC58MNYxxgWoE/9LDE3H4XC6XTCb/d/aBCLZkMhn8RXxxhUJBDESv1+O/Ys0dbeeNW2L9VQdAwIPwEfEPEeEIhUL8Uq/Xs/+y2WwikThUE7vzm/2BEZbJZAgGcJB0Ot1/cTDZZDLZ7fZQKES8IRqNut3ujo4O6YJL/BxhMBiw5nU6XSKRyGQyOJRHm/4mMJBKpaxWayKR2L9/v9VqtVqtyWQSSY7OJihN3Bc/WKVSBYPBsrIyrVZbX19fUlLyo9dvbm52OByVlZVtbW0ajebzzz+/++67W1tbGxsb9Xo9bg+ucy6X83g8KDiz2YzfTyw5mUwmk8kLLrhg8ODBM2bMuP7669va2lwuF8FIgqNYSyK0/u/GzwnEa7Vai8WiUql8Pl84HMb6yPcnSGpkN/pD5P9Qxp099QL3JFQOz49O/U/vA8L1SqXSZrPh9xOcQTST/lepVEdtCD2RSIjbzmazRAtE4FpsFMzSdDqt1+stFovBYEgkEpFIJJfLjRgxokePHm1tbYf0vfle5ahRo6LRaCQScTqdiUQil8uRRvpvlXckKXjAVCrF9pDJb4mfr/5OpVJ4aygVh8MRCAQMBsNRdZ8EFAk96vX62tpaYn243ahPkdXFBcUTQ4bH4/FMJlNdXZ1PniPtUcCPP/74woULEZhQhRKJhFar7d69+9ChQ/v27etwOPBSGhoa1q9fv337dr/fn8lk4BspFIrdu3ffcccdf/vb35YvX45bKyLnZrOZWD2uTr788iHob7L0WDEul8tisaRSqXzeM7fSWUP/QGejxfECCUTnMwJEEF54kP8LReR+vz+ZTNrtdr1e39DQYDYbYHWh/FpaWnK5XG1tbS6X8/l8ZMSPqn2MzaTVakUEBuIGS4oBJMw6PONgMJhIJHgRbrd75syZp5122qHmBfLp71AoZLVaiVtA9MBu+G+Nn5MptNlsyBGTyZROp4uLi/9b8/0S/93w+Xy5XI7MV1FREertKGz2gLdqsVhIYxsMhkwmQ/Jeq9XihRI85z9bW1tLS0tbWlrMZjM57/3793ft2jXf9Wtra+vq6rxe72OPPfb888/rdDpIPMlksm/fvueee+7UqVN79uyJ+W40GpF4SLlwOLx58+Y33nhj9erV27Zts1qthO43bdpUVVX17rvvHnfccWazWfi36XQaTQ9p7N/S34aSQdgdgm94YdAJKgQOeC/oEHx4Q6FIAXCM+C+o4f8d28WnzCjJJnpOEEv9TcDaUKq0OyO1OFxsBHb6f7B5F0FGOFITmcDcGwnLo4W6p3v6lMhb8G1oMh/HqcHv1veCKbFr4fzjhA4dU8Pt2pj55dEqVjblzAi0ciuWfOqoJzQTF+TxO4D1sNBhBhBtbAk+Z6SRxWbzCU0MhEAWxFLg9OIDG18cYb0ggFgMBtKrh3sNmD86DW7M9lHhj4BIb1y4dOr2Kp7PJqGJigVUq8QpfLCZvL7KgYPyJ+QYj+1kKkxMTUVlnqeEQnlHe2Gc2CaHakOtPJWPjl5YiS9Kw7ZKPv0N7+IXuYY4N9R0C9tJj1AHxD5RbQ8HK3GBYP5hh2yegdPUKEIoHsatcAgLrwCMqNcAIGDMKA0MaDNz7JvjAKcJoQAlN9LJjM4jkKgiNAHbMKR+q6cgVMfQN/TLMoELYaJgLBRCgMJAcExYDRB+VIbT0aJP2vS/IAKB4wGBz4H6GqUMbSP1UwYrgAAAABJRU5ErkJggg=="/>
+    </div>
   </div>
 </header>
 
@@ -195,15 +205,12 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
       </div>
     </div>
     <div class="filter-btns">
-      <button class="btn-apply" onclick="applyFilters()">Apply</button>
-      <button class="btn-reset" onclick="resetFilters()">Clear</button>
+      <button class="btn-apply" onclick="applyFilters()">Apply Filters</button>
+      <button class="btn-reset"  onclick="resetFilters()">Clear</button>
     </div>
   </div>
 
-  <!-- DEBUG INFO (shown only when date filter is active) -->
-  <div id="dateDebug"></div>
-
-  <!-- STATS -->
+  <!-- STATS (hidden until filter applied) -->
   <div id="statsBar" class="stats-bar" style="display:none">
     <div class="stat"><div class="num" id="sTot">0</div><div class="lbl">Total Permits</div></div>
     <div class="stat s-info"><div class="num" id="sWrk">0</div><div class="lbl">Workers On‑Site</div></div>
@@ -211,7 +218,7 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
     <div class="stat s-warn"><div class="num" id="sPrg">0</div><div class="lbl">In Progress</div></div>
   </div>
 
-  <!-- SECTION HEAD -->
+  <!-- SECTION HEAD (hidden until filter applied) -->
   <div id="secHead" class="sec-head" style="display:none">
     <span class="sec-label">Work Permit Records</span>
     <span id="cntBadge" class="count-badge">0 Results</span>
@@ -219,7 +226,8 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 
   <!-- RESULTS -->
   <div id="results">
-    <div class="loading"><div class="spinner"></div><span>Fetching permit records…</span></div>
+    <!-- Show placeholder until data is ready + filters applied -->
+    <div class="loading"><div class="spinner"></div><span>Fetching permit data…</span></div>
   </div>
 
 </main>
@@ -227,27 +235,27 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 <script>
 const CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0DM28N6v5VcvqZ2mZWWDoEACvKUhwU3sC9ec_8Owm16L9Oxx84MVLr3MHeXP3Gk4eL_aj4LJbEEu8/pub?output=csv';
 
-// 0-based col indices: A=0 B=1 C=2 D=3 E=4 F=5 G=6 H=7 I=8 J=9 K=10 L=11 ... Q=16
+// 0-based column indices
+// A=0 B=1 C=2 D=3 E=4 F=5 G=6 H=7 I=8 J=9 K=10 L=11 ... Q=16
 const C = {name:0,id:1,project:2,tower:3,unit:5,start:6,status:7,workers:8,desc:9,raised:11,end:16};
 
-let ALL = [];          // all data rows (arrays)
-let dateMin = null;    // earliest YYYYMMDD integer across dataset
-let dateMax = null;
+let ALL = [];        // [{cols, dateVal, rawDate}, ...]
+let dataReady = false;
 
-/* ═══════════════════════════════════════════
-   CSV PARSER  — simple, no regex
-═══════════════════════════════════════════ */
+/* ══════════════════════════════════════════
+   CSV PARSER
+══════════════════════════════════════════ */
 function parseCSV(txt) {
   const rows = [];
   const lines = txt.split(/\r?\n/);
   for (const line of lines) {
     if (!line.trim()) continue;
-    const cols = []; let cur = '', q = false;
-    for (let i = 0; i < line.length; i++) {
-      const c = line[i];
-      if (c === '"') { if (q && line[i+1]==='"'){cur+='"';i++} else q=!q; }
-      else if (c===',' && !q) { cols.push(cur.trim()); cur=''; }
-      else cur += c;
+    const cols=[]; let cur='', q=false;
+    for (let i=0;i<line.length;i++){
+      const c=line[i];
+      if(c==='"'){if(q&&line[i+1]==='"'){cur+='"';i++}else q=!q;}
+      else if(c===','&&!q){cols.push(cur.trim());cur='';}
+      else cur+=c;
     }
     cols.push(cur.trim());
     rows.push(cols);
@@ -255,12 +263,16 @@ function parseCSV(txt) {
   return rows;
 }
 
-/* ═══════════════════════════════════════════
-   DATE PARSING — returns integer YYYYMMDD or null
-   Handles: DD/MM/YYYY, MM/DD/YYYY, YYYY-MM-DD,
-   D-MMM-YY, D-MMM-YYYY, serial numbers, etc.
-═══════════════════════════════════════════ */
-const MON = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+/* ══════════════════════════════════════════
+   DATE PARSER  → integer YYYYMMDD or null
+   
+   Your sheet uses: "02 Jan, 2026, Fri, 08:02 am"
+   Pattern:  DD Mon, YYYY, ...
+   Regex:    /^(\d{1,2})\s+([A-Za-z]{3}),?\s*(\d{4})/
+   
+   Also handles: DD/MM/YYYY, YYYY-MM-DD, DD-Mon-YYYY
+══════════════════════════════════════════ */
+const MON={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
 
 function toYMD(raw) {
   if (!raw) return null;
@@ -269,12 +281,13 @@ function toYMD(raw) {
 
   let m;
 
-  // YYYY-MM-DD  or  YYYY/MM/DD
-  if ((m = s.match(/^(\d{4})[\-\/](\d{1,2})[\-\/](\d{1,2})/))) {
-    return ymd(+m[1], +m[2], +m[3]);
+  // "02 Jan, 2026, Fri, 08:02 am"  →  DD Mon, YYYY
+  if ((m = s.match(/^(\d{1,2})\s+([A-Za-z]{3}),?\s*(\d{4})/))) {
+    const mon = MON[m[2].toLowerCase()];
+    if (mon) return ymd(+m[3], mon, +m[1]);
   }
 
-  // DD-MMM-YYYY  or  DD-MMM-YY  e.g. 3-Jan-25, 03-Jan-2025
+  // DD-Mon-YYYY or DD-Mon-YY
   if ((m = s.match(/^(\d{1,2})[\-\s]([A-Za-z]{3})[\-\s](\d{2,4})/))) {
     const mon = MON[m[2].toLowerCase()];
     if (mon) {
@@ -283,17 +296,15 @@ function toYMD(raw) {
     }
   }
 
-  // DD/MM/YYYY  or  DD-MM-YYYY  (day first — India standard)
-  if ((m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/))) {
+  // YYYY-MM-DD or YYYY/MM/DD
+  if ((m = s.match(/^(\d{4})[\-\/](\d{1,2})[\-\/](\d{1,2})/)))
+    return ymd(+m[1], +m[2], +m[3]);
+
+  // DD/MM/YYYY or DD-MM-YYYY  (India default: day first)
+  if ((m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/)))
     return ymd(+m[3], +m[2], +m[1]);
-  }
 
-  // MM/DD/YYYY
-  if ((m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})/))) {
-    return ymd(+m[3], +m[1], +m[2]);
-  }
-
-  // Excel serial number (integer string like "45200")
+  // Excel serial (5-digit integer)
   if (/^\d{5}$/.test(s)) {
     const d = new Date(Math.round((+s - 25569) * 86400000));
     if (!isNaN(d)) return ymd(d.getFullYear(), d.getMonth()+1, d.getDate());
@@ -302,190 +313,190 @@ function toYMD(raw) {
   return null;
 }
 
-function ymd(y, m, d) {
-  if (y < 1900 || y > 2100 || m < 1 || m > 12 || d < 1 || d > 31) return null;
-  return y * 10000 + m * 100 + d;  // e.g. 20250315
+function ymd(y,m,d){
+  if(y<1900||y>2100||m<1||m>12||d<1||d>31) return null;
+  return y*10000 + m*100 + d;
 }
 
-function ymdFromInput(v) {
-  // HTML date input gives YYYY-MM-DD
-  if (!v) return null;
-  const p = v.split('-');
-  if (p.length !== 3) return null;
-  return ymd(+p[0], +p[1], +p[2]);
+function ymdFromInput(v){
+  if(!v) return null;
+  const p=v.split('-');
+  if(p.length!==3) return null;
+  return ymd(+p[0],+p[1],+p[2]);
 }
 
-/* ═══════════════════════════════════════════
-   LOAD DATA
-═══════════════════════════════════════════ */
-async function loadData() {
+/* ══════════════════════════════════════════
+   LOAD DATA (fetch CSV, parse, populate UI)
+══════════════════════════════════════════ */
+async function loadData(){
   try {
     const res = await fetch(CSV);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    if (!res.ok) throw new Error('HTTP '+res.status);
     const txt = await res.text();
     const rows = parseCSV(txt);
 
-    // Skip header row (index 0); keep rows with a real Permit ID
-    ALL = rows.slice(1).filter(r => {
-      if (!r || r.length < 3) return false;
-      const id = (r[C.id] || '').trim();
-      return id.length > 0;
-    });
+    // Row 0 = headers → skip; keep rows with a real Permit ID in col B
+    ALL = rows.slice(1)
+      .filter(r => r && r.length >= 3 && (r[C.id]||'').trim())
+      .map(r => ({
+        cols: r,
+        dateVal: toYMD(r[C.start] || ''),
+        rawDate: r[C.start] || ''
+      }));
 
-    // Pre-compute parsed date for each row (store as integer on the row object)
-    // Use a parallel array to avoid mutating CSV data
-    ALL = ALL.map(r => {
-      const raw = r[C.start] || '';
-      const d   = toYMD(raw);
-      return { cols: r, dateVal: d, rawDate: raw };
-    });
-
-    // Build project list
     buildProjectDropdown();
+    dataReady = true;
 
-    // Render
-    renderRows(ALL);
-
-    // Sync message
     const t = new Date().toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
     document.getElementById('syncTxt').textContent = `Synced ${t} · ${ALL.length} records`;
+
+    // Show the placeholder (do NOT auto-render all cards)
+    showPlaceholder();
 
   } catch(e) {
     document.getElementById('results').innerHTML = `
       <div class="empty">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <p>Could not load data.<br><small style="font-size:11px;color:var(--label)">${e.message}</small></p>
+        <p>Could not load data. Ensure the Google Sheet is published to the web as CSV.<br><small style="font-size:11px;color:var(--label)">${e.message}</small></p>
       </div>`;
     document.getElementById('syncTxt').textContent = 'Connection error';
   }
 }
 
-/* ═══════════════════════════════════════════
+function showPlaceholder(){
+  document.getElementById('statsBar').style.display = 'none';
+  document.getElementById('secHead').style.display  = 'none';
+  document.getElementById('results').innerHTML = `
+    <div class="placeholder">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+      <h3>Select Filters to View Permits</h3>
+      <p>Choose a project and / or a date range above, then click <strong>Apply Filters</strong> to load work permit records.</p>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════
    PROJECT DROPDOWN
-═══════════════════════════════════════════ */
-function buildProjectDropdown() {
+══════════════════════════════════════════ */
+function buildProjectDropdown(){
   const sel = document.getElementById('selProject');
   while (sel.options.length > 1) sel.remove(1);
-
   const seen = new Set();
-  for (const {cols} of ALL) {
-    const p = (cols[C.project] || '').trim();
+  for (const {cols} of ALL){
+    const p = (cols[C.project]||'').trim();
     if (!p) continue;
     if (/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)/i.test(p)) continue;
     if (/^\d{1,2}[:/]\d{2}/.test(p)) continue;
-    if (/^(project\s*name?|project)$/i.test(p)) continue;
+    if (/^project/i.test(p)) continue;
     seen.add(p);
   }
-  [...seen].sort((a,b)=>a.localeCompare(b)).forEach(p => {
-    const o = document.createElement('option');
-    o.value = o.textContent = p;
+  [...seen].sort((a,b)=>a.localeCompare(b)).forEach(p=>{
+    const o=document.createElement('option');
+    o.value=o.textContent=p;
     sel.appendChild(o);
   });
 }
 
-/* ═══════════════════════════════════════════
-   APPLY / RESET FILTERS
-═══════════════════════════════════════════ */
-function applyFilters() {
+/* ══════════════════════════════════════════
+   APPLY / RESET
+══════════════════════════════════════════ */
+function applyFilters(){
+  if (!dataReady){
+    alert('Data is still loading, please wait a moment.');
+    return;
+  }
   const proj  = document.getElementById('selProject').value;
-  const fromV = document.getElementById('dFrom').value;
-  const toV   = document.getElementById('dTo').value;
+  const fromN = ymdFromInput(document.getElementById('dFrom').value);
+  const toN   = ymdFromInput(document.getElementById('dTo').value);
 
-  const fromN = ymdFromInput(fromV);   // integer or null
-  const toN   = ymdFromInput(toV);
+  // At least one filter must be set
+  if (!proj && !fromN && !toN){
+    showPlaceholder();
+    return;
+  }
 
   let rows = ALL;
 
-  if (proj) {
-    rows = rows.filter(({cols}) => (cols[C.project]||'').trim() === proj);
-  }
+  if (proj) rows = rows.filter(({cols})=>(cols[C.project]||'').trim()===proj);
 
-  if (fromN || toN) {
-    rows = rows.filter(({dateVal}) => {
-      if (dateVal === null) return false;   // exclude rows with unparseable dates when a date filter is active
+  if (fromN || toN){
+    rows = rows.filter(({dateVal})=>{
+      if (dateVal===null) return false;   // unparseable → exclude when date filter active
       if (fromN && dateVal < fromN) return false;
       if (toN   && dateVal > toN)   return false;
       return true;
     });
-
-    // Debug panel: show sample raw dates & parsed values
-    const dbg = document.getElementById('dateDebug');
-    const samples = ALL.slice(0,5).map(({rawDate,dateVal}) =>
-      `"${rawDate}" → ${dateVal || '(could not parse)'}`).join(' | ');
-    dbg.textContent = `Date debug – sample raw values: ${samples}`;
-    dbg.style.display = 'block';
-  } else {
-    document.getElementById('dateDebug').style.display = 'none';
   }
 
-  renderRows(rows);
+  renderCards(rows);
 }
 
-function resetFilters() {
-  document.getElementById('selProject').value = '';
-  document.getElementById('dFrom').value = '';
-  document.getElementById('dTo').value = '';
-  document.getElementById('dateDebug').style.display = 'none';
-  renderRows(ALL);
+function resetFilters(){
+  document.getElementById('selProject').value='';
+  document.getElementById('dFrom').value='';
+  document.getElementById('dTo').value='';
+  if (dataReady) showPlaceholder();
 }
 
-/* ═══════════════════════════════════════════
+/* ══════════════════════════════════════════
    STATUS HELPERS
-═══════════════════════════════════════════ */
-function sKey(s) {
-  if (!s) return 'oth';
-  const l = s.toLowerCase();
-  if (l.includes('open'))     return 'open';
-  if (l.includes('progress')) return 'prog';
-  if (l.includes('clos'))     return 'close';
-  if (l.includes('expir'))    return 'exp';
-  if (l.includes('pend'))     return 'pend';
+══════════════════════════════════════════ */
+function sKey(s){
+  if(!s) return 'oth';
+  const l=s.toLowerCase();
+  if(l.includes('open'))     return 'open';
+  if(l.includes('progress')) return 'prog';
+  if(l.includes('clos'))     return 'close';
+  if(l.includes('expir'))    return 'exp';
+  if(l.includes('pend'))     return 'pend';
   return 'oth';
 }
-const STRIP = {open:'s-open',prog:'s-prog',close:'s-close',exp:'s-exp',pend:'s-pend',oth:'s-oth'};
-const BADGE  = {open:'b-open',prog:'b-prog',close:'b-close',exp:'b-exp',pend:'b-pend',oth:'b-oth'};
+const STRIP={open:'s-open',prog:'s-prog',close:'s-close',exp:'s-exp',pend:'s-pend',oth:'s-oth'};
+const BADGE ={open:'b-open',prog:'b-prog',close:'b-close',exp:'b-exp',pend:'b-pend',oth:'b-oth'};
 
-/* ═══════════════════════════════════════════
-   RENDER — uses DocumentFragment for speed
-═══════════════════════════════════════════ */
-function renderRows(rows) {
-  const area   = document.getElementById('results');
-  const stats  = document.getElementById('statsBar');
-  const secH   = document.getElementById('secHead');
-  const cntBdg = document.getElementById('cntBadge');
+/* ══════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════ */
+function renderCards(rows){
+  const area    = document.getElementById('results');
+  const statsEl = document.getElementById('statsBar');
+  const secH    = document.getElementById('secHead');
+  const cntBdg  = document.getElementById('cntBadge');
 
-  if (!rows.length) {
-    stats.style.display = 'none';
-    secH.style.display  = 'none';
-    area.innerHTML = `
+  if (!rows.length){
+    statsEl.style.display='none';
+    secH.style.display='none';
+    area.innerHTML=`
       <div class="empty">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <p>No permits match your filters.</p>
+        <p>No permits match your filters. Try adjusting the project or date range.</p>
       </div>`;
     return;
   }
 
   // Stats
-  let totW = 0, opn = 0, prg = 0;
-  for (const {cols} of rows) {
-    totW += (parseInt(cols[C.workers]) || 0);
-    const k = sKey(cols[C.status]);
-    if (k==='open') opn++;
-    if (k==='prog') prg++;
+  let totW=0,opn=0,prg=0;
+  for(const {cols} of rows){
+    totW+=(parseInt(cols[C.workers])||0);
+    const k=sKey(cols[C.status]);
+    if(k==='open') opn++;
+    if(k==='prog') prg++;
   }
-  document.getElementById('sTot').textContent = rows.length;
-  document.getElementById('sWrk').textContent = totW;
-  document.getElementById('sOpn').textContent = opn;
-  document.getElementById('sPrg').textContent = prg;
-  stats.style.display = 'flex';
-  secH.style.display  = 'flex';
-  cntBdg.textContent  = rows.length + ' Result' + (rows.length!==1?'s':'');
+  document.getElementById('sTot').textContent=rows.length;
+  document.getElementById('sWrk').textContent=totW;
+  document.getElementById('sOpn').textContent=opn;
+  document.getElementById('sPrg').textContent=prg;
+  statsEl.style.display='flex';
+  secH.style.display='flex';
+  cntBdg.textContent=rows.length+' Result'+(rows.length!==1?'s':'');
 
-  // Build cards via innerHTML in one shot (fastest for large lists)
-  const parts = [];
-  for (const {cols} of rows) {
-    const k  = sKey(cols[C.status]);
-    const st = cols[C.status] || 'Unknown';
+  // Build HTML in one pass (fastest DOM method)
+  const parts=[];
+  for(const {cols} of rows){
+    const k=sKey(cols[C.status]);
     parts.push(`
 <div class="card">
   <div class="strip ${STRIP[k]}"></div>
@@ -493,9 +504,9 @@ function renderRows(rows) {
     <div class="c-head">
       <div class="c-head-left">
         <div class="c-id">${x(cols[C.id])}</div>
-        <div class="c-name">${x(cols[C.name]) || '—'}</div>
+        <div class="c-name">${x(cols[C.name])||'—'}</div>
       </div>
-      <span class="badge ${BADGE[k]}">${x(st)}</span>
+      <span class="badge ${BADGE[k]}">${x(cols[C.status])||'Unknown'}</span>
     </div>
     <div class="info-grid">
       <div><div class="ik">Project</div><div class="iv">${x(cols[C.project])||'—'}</div></div>
@@ -517,12 +528,11 @@ function renderRows(rows) {
   </div>
 </div>`);
   }
-
-  area.innerHTML = `<div class="grid">${parts.join('')}</div>`;
+  area.innerHTML=`<div class="grid">${parts.join('')}</div>`;
 }
 
-function x(s) {
-  if (!s) return '';
+function x(s){
+  if(!s) return '';
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
