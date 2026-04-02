@@ -16,7 +16,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;min-height:100vh;-webkit-font-smoothing:antialiased}
 
-/* ── HEADER ── */
+/* HEADER */
 header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid var(--border);height:64px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 6px rgba(0,0,0,.06)}
 .hd-left{display:flex;flex-direction:column;gap:2px}
 .hd-eye{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600}
@@ -29,10 +29,10 @@ header{position:sticky;top:0;z-index:200;background:#fff;border-bottom:1px solid
 .logo-wrap{height:40px;padding:3px 10px;background:#fff;border:1px solid var(--border2);border-radius:6px;display:flex;align-items:center}
 .logo-img{height:30px;width:auto;display:block;object-fit:contain}
 
-/* ── MAIN ── */
+/* MAIN */
 main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 
-/* ── FILTER PANEL ── */
+/* FILTER PANEL */
 .filter-panel{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:18px 22px;margin-bottom:20px;display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:160px}
 .field label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--label);font-weight:600}
@@ -47,25 +47,23 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 .btn-reset{background:transparent;color:var(--sub);border:1px solid var(--border);border-radius:7px;padding:9px 14px;font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
 .btn-reset:hover{color:var(--text);border-color:var(--sub);background:var(--bg)}
 
-/* ── PLACEHOLDER ── */
+/* PLACEHOLDER */
 .placeholder{text-align:center;padding:80px 20px;color:var(--sub)}
 .placeholder svg{width:52px;height:52px;margin-bottom:16px;opacity:.2}
 .placeholder h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--accent);margin-bottom:8px}
 .placeholder p{font-size:13px;color:var(--label);max-width:340px;margin:0 auto;line-height:1.6}
 
-/* ── STATS ── */
+/* STATS - only 2 cards now */
 .stats-bar{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-.stat{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px 18px;min-width:110px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.stat{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:12px 18px;min-width:130px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
 .stat .num{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--accent);line-height:1}
 .stat .lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:600;margin-top:2px}
-.stat.s-open .num{color:#2d7a47}
 .stat.s-info .num{color:#1a4f7a}
-.stat.s-warn .num{color:#a06010}
 .sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .sec-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--sub);font-weight:600}
 .count-badge{background:var(--gold-bg);color:var(--gold);border:1px solid rgba(138,109,53,.18);border-radius:20px;font-size:11px;font-weight:600;padding:3px 11px}
 
-/* ── GRID & CARD ── */
+/* GRID & CARD */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:14px}
 .card{background:#fff;border:1px solid var(--border);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 4px rgba(0,0,0,.05);transition:transform .18s,box-shadow .18s;cursor:pointer}
 .card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,.12);border-color:#c8c2bc}
@@ -99,9 +97,7 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 .workers strong{color:var(--text);font-weight:600}
 .raised{font-size:11px;color:var(--label);background:var(--bg);border:1px solid var(--border2);border-radius:20px;padding:2px 10px}
 .raised span{color:#2d6e4e;font-weight:500}
-.click-hint{font-size:10px;color:var(--label);letter-spacing:.06em;opacity:.7}
-
-/* ── EMPTY / LOADING ── */
+.click-hint{font-size:10px;color:var(--label);letter-spacing:.05em;opacity:.7}
 .empty{text-align:center;padding:60px 20px;color:var(--sub)}
 .empty svg{width:40px;height:40px;margin-bottom:12px;opacity:.25}
 .empty p{font-size:13px}
@@ -109,89 +105,43 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 .spinner{width:28px;height:28px;border:2.5px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ══════════════════════════════════════════
-   MODAL OVERLAY
-══════════════════════════════════════════ */
-.modal-overlay{
-  display:none;position:fixed;inset:0;z-index:900;
-  background:rgba(0,0,0,.55);backdrop-filter:blur(4px);
-  overflow-y:auto;padding:24px 16px;
-  align-items:flex-start;justify-content:center;
-}
+/* ═══════════ MODAL ═══════════ */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:900;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);overflow-y:auto;padding:24px 16px;align-items:flex-start;justify-content:center}
 .modal-overlay.open{display:flex}
-
-.modal-box{
-  background:#fff;border-radius:14px;
-  max-width:860px;width:100%;margin:auto;
-  box-shadow:0 24px 80px rgba(0,0,0,.25);
-  overflow:hidden;position:relative;
-}
-
-/* MODAL CLOSE BTN */
-.modal-close-x{
-  position:absolute;top:14px;right:14px;z-index:10;
-  background:rgba(0,0,0,.06);border:none;border-radius:50%;
-  width:32px;height:32px;cursor:pointer;font-size:16px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--sub);transition:background .15s;
-}
+.modal-box{background:#fff;border-radius:14px;max-width:860px;width:100%;margin:auto;box-shadow:0 24px 80px rgba(0,0,0,.25);overflow:hidden;position:relative}
+.modal-close-x{position:absolute;top:14px;right:14px;z-index:10;background:rgba(0,0,0,.06);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--sub);transition:background .15s}
 .modal-close-x:hover{background:rgba(0,0,0,.12)}
 
 /* PDF-style header */
-.m-header{
-  border:1px solid #ccc;margin:16px 16px 0;border-radius:8px;
-  overflow:hidden;
-}
-.m-header-top{
-  display:grid;grid-template-columns:80px 1fr auto;
-  border-bottom:1px solid #ccc;
-}
-.m-qr{
-  border-right:1px solid #ccc;display:flex;align-items:center;justify-content:center;
-  padding:8px;background:#f8f8f8;
-}
-.m-qr svg{width:56px;height:56px}
+.m-header{border:1px solid #ccc;margin:16px 16px 0;border-radius:8px;overflow:hidden}
+.m-header-top{display:grid;grid-template-columns:72px 1fr auto;border-bottom:1px solid #ccc}
+.m-qr{border-right:1px solid #ccc;display:flex;align-items:center;justify-content:center;padding:8px;background:#f8f8f8}
+.m-qr svg{width:48px;height:48px}
 .m-title-block{padding:10px 14px;display:flex;flex-direction:column;justify-content:center;gap:4px}
 .m-permit-type{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#111;text-align:center}
-.m-meta-row{display:flex;gap:20px;font-size:10.5px;color:#444}
-.m-meta-row span{font-weight:500}
-.m-logo-block{
-  border-left:1px solid #ccc;padding:10px 14px;
-  display:flex;align-items:center;justify-content:center;min-width:170px;
-}
-.m-logo-block img{height:28px;width:auto;display:block}
-.m-header-bottom{
-  display:grid;grid-template-columns:1fr 1fr;
-  font-size:11px;
-}
-.m-header-bottom > div{padding:7px 14px;display:flex;align-items:center;gap:6px}
-.m-header-bottom > div:first-child{border-right:1px solid #ccc}
-.m-status-pill{
-  display:inline-flex;align-items:center;padding:2px 10px;border-radius:20px;
-  font-weight:600;font-size:10.5px;letter-spacing:.06em;
-}
+.m-permit-subtype{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#888;font-weight:600;text-align:center;margin-top:2px}
+.m-logo-block{border-left:1px solid #ccc;padding:10px 14px;display:flex;align-items:center;justify-content:center;min-width:160px}
+.m-logo-block img{height:26px;width:auto;display:block}
+.m-header-bottom{display:grid;grid-template-columns:1fr 1fr;font-size:11px}
+.m-header-bottom>div{padding:7px 14px;display:flex;align-items:center;gap:6px}
+.m-header-bottom>div:first-child{border-right:1px solid #ccc}
+.m-status-pill{display:inline-flex;align-items:center;padding:2px 10px;border-radius:20px;font-weight:600;font-size:10.5px;letter-spacing:.06em}
 .pill-approved{background:#eaf5ee;color:#2d7a47;border:1px solid #b8ddc4}
 .pill-pending{background:#fdf3e4;color:#a06010;border:1px solid #e8d098}
+.pill-closed{background:#f0efee;color:#5a5652;border:1px solid #d0ccc8}
 .pill-other{background:#f0efee;color:#5a5652;border:1px solid #d0ccc8}
 
-/* PDF sections */
+/* Sections */
 .m-body{padding:0 16px 16px}
 .m-section{border:1px solid #ccc;border-radius:6px;margin-top:10px;overflow:hidden}
-.m-section-title{
-  background:#f0f0f0;border-bottom:1px solid #ccc;
-  padding:5px 12px;font-size:10px;font-weight:700;
-  letter-spacing:.14em;text-transform:uppercase;color:#333;
-}
+.m-section-title{background:#f0f0f0;border-bottom:1px solid #ccc;padding:5px 12px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#333}
 .m-section-body{padding:10px 12px}
 
-/* Two-column location/duration */
 .m-two-col{display:grid;grid-template-columns:1fr 1fr;border:1px solid #ccc;border-radius:6px;margin-top:10px;overflow:hidden}
-.m-col{padding:0}
 .m-col:first-child{border-right:1px solid #ccc}
 .m-col-title{background:#f0f0f0;border-bottom:1px solid #ccc;padding:5px 12px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#333}
 .m-col-body{padding:10px 12px}
 
-/* Field rows */
 .m-field{margin-bottom:8px}
 .m-field:last-child{margin-bottom:0}
 .m-field-key{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#888;font-weight:600;margin-bottom:2px}
@@ -199,45 +149,50 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 
 /* Checkbox grid */
 .m-cb-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px 8px}
+.m-cb-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:5px 8px}
 .m-cb-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:#333}
-.m-cb{width:14px;height:14px;border:1.5px solid #aaa;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.m-cb.checked{border-color:#2d7a47;background:#eaf5ee}
-.m-cb.checked::after{content:'✓';font-size:10px;color:#2d7a47;font-weight:700}
+.m-cb{width:14px;height:14px;border:1.5px solid #aaa;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff}
+.m-cb.chk{border-color:#2d7a47;background:#eaf5ee}
+.m-cb.chk::after{content:'✓';font-size:10px;color:#2d7a47;font-weight:700}
+
+/* Workers row */
+.m-workers-row{display:flex;gap:12px;flex-wrap:wrap}
+.m-workers-item{flex:1;min-width:90px;background:#f8f8f6;border:1px solid var(--border2);border-radius:6px;padding:8px 12px;text-align:center}
+.m-workers-item .wnum{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent);line-height:1}
+.m-workers-item .wlbl{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:600;margin-top:2px}
 
 /* Timeline */
 .m-timeline{list-style:none;padding:0;margin:0}
 .m-timeline li{display:flex;align-items:flex-start;gap:10px;padding:6px 0;border-bottom:1px solid #f0eeeb;font-size:12px;color:#333}
 .m-timeline li:last-child{border-bottom:none}
-.m-tl-dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:3px}
+.m-tl-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.m-tl-green{background:#2d7a47}
 .m-tl-text strong{font-weight:600;color:#111}
-.m-tl-text span{color:#888;font-size:11px;margin-left:6px}
+.m-tl-text span{color:#888;font-size:11px;margin-left:4px}
 
-/* Workers row */
-.m-workers-row{display:flex;gap:16px;flex-wrap:wrap}
-.m-workers-item{flex:1;min-width:100px;background:#f8f8f6;border:1px solid var(--border2);border-radius:6px;padding:8px 12px;text-align:center}
-.m-workers-item .wnum{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--accent);line-height:1}
-.m-workers-item .wlbl{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--label);font-weight:600;margin-top:2px}
+/* Acknowledgment section */
+.m-ack-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.m-ack-card{background:#f9f8f6;border:1px solid var(--border2);border-radius:6px;padding:10px 12px}
+.m-ack-role{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#888;font-weight:600;margin-bottom:4px}
+.m-ack-name{font-size:13px;font-weight:600;color:var(--accent)}
+.m-ack-badge{display:inline-flex;margin-top:4px;font-size:10px;padding:2px 8px;border-radius:12px;background:#eaf5ee;color:#2d7a47;border:1px solid #b8ddc4;font-weight:600}
 
-/* MODAL FOOTER */
-.m-footer{
-  padding:14px 16px;border-top:1px solid var(--border2);
-  display:flex;justify-content:space-between;align-items:center;
-  background:#fafaf8;gap:10px;flex-wrap:wrap;
-}
-.btn-pdf{
-  background:var(--accent);color:#fff;border:none;border-radius:7px;
-  padding:9px 20px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;
-  letter-spacing:.07em;text-transform:uppercase;cursor:pointer;
-  display:flex;align-items:center;gap:7px;
-  box-shadow:0 2px 8px rgba(27,58,43,.22);transition:background .15s;
-}
+/* Footer */
+.m-footer{padding:14px 16px;border-top:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;background:#fafaf8;gap:10px;flex-wrap:wrap}
+.btn-pdf{background:var(--accent);color:#fff;border:none;border-radius:7px;padding:9px 20px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:0 2px 8px rgba(27,58,43,.22);transition:background .15s}
 .btn-pdf:hover{background:#2d5e3f}
-.btn-close-modal{
-  background:transparent;color:var(--sub);border:1px solid var(--border);
-  border-radius:7px;padding:9px 18px;font-family:'Inter',sans-serif;font-size:12px;
-  cursor:pointer;transition:all .15s;
-}
+.btn-close-modal{background:transparent;color:var(--sub);border:1px solid var(--border);border-radius:7px;padding:9px 18px;font-family:'Inter',sans-serif;font-size:12px;cursor:pointer;transition:all .15s}
 .btn-close-modal:hover{color:var(--text);border-color:var(--sub);background:var(--bg)}
+
+/* Sub-label within section */
+.m-sub-label{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:#888;font-weight:600;margin:10px 0 5px}
+.m-sub-label:first-child{margin-top:0}
+
+/* YES/NO/N/A row */
+.yn-row{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:#333;gap:8px}
+.yn-btns{display:flex;gap:4px;flex-shrink:0}
+.yn-btn{border:1px solid #ccc;border-radius:4px;padding:2px 8px;font-size:10.5px;font-weight:500;color:#555}
+.yn-btn.active{background:#1b3a2b;color:#fff;border-color:#1b3a2b;font-weight:600}
 
 @media(max-width:700px){
   header{padding:0 14px;height:56px}
@@ -245,10 +200,9 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
   .filter-panel{flex-direction:column}
   .grid{grid-template-columns:1fr}
   .date-row{flex-direction:column;align-items:stretch}
-  .m-two-col,.m-header-top,.m-cb-grid{grid-template-columns:1fr}
+  .m-two-col,.m-header-top,.m-cb-grid,.m-ack-grid{grid-template-columns:1fr}
   .m-col:first-child{border-right:none;border-bottom:1px solid #ccc}
   .m-logo-block{border-left:none;border-top:1px solid #ccc}
-  .m-workers-row{flex-direction:column}
 }
 </style>
 </head>
@@ -262,9 +216,7 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
   <div class="hd-right">
     <div class="sync-wrap"><span class="dot"></span><span id="syncTxt">Loading…</span></div>
     <div class="logo-divider"></div>
-    <div class="logo-wrap">
-      <img id="hd-logo" class="logo-img" alt="TotalEnvironment"/>
-    </div>
+    <div class="logo-wrap"><img id="hd-logo" class="logo-img" alt="TotalEnvironment"/></div>
   </div>
 </header>
 
@@ -288,11 +240,10 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
     </div>
   </div>
 
+  <!-- STATS: Only Total Permits + Workers -->
   <div id="statsBar" class="stats-bar" style="display:none">
     <div class="stat"><div class="num" id="sTot">0</div><div class="lbl">Total Permits</div></div>
     <div class="stat s-info"><div class="num" id="sWrk">0</div><div class="lbl">Workers On-Site</div></div>
-    <div class="stat s-open"><div class="num" id="sOpn">0</div><div class="lbl">Open</div></div>
-    <div class="stat s-warn"><div class="num" id="sPrg">0</div><div class="lbl">In Progress</div></div>
   </div>
 
   <div id="secHead" class="sec-head" style="display:none">
@@ -305,14 +256,12 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
   </div>
 </main>
 
-<!-- ══════════════════════════════════════
-     MODAL
-══════════════════════════════════════ -->
+<!-- ═══════════ MODAL ═══════════ -->
 <div id="modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
   <div class="modal-box">
     <button class="modal-close-x" onclick="closeModal()">✕</button>
 
-    <!-- PDF-style permit header -->
+    <!-- Header: Permit Type + Status + Permit No + Logo -->
     <div class="m-header">
       <div class="m-header-top">
         <div class="m-qr">
@@ -323,25 +272,18 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
             <rect x="67" y="15" width="18" height="18" fill="#333"/>
             <rect x="5" y="57" width="38" height="38" rx="4" fill="none" stroke="#333" stroke-width="6"/>
             <rect x="15" y="67" width="18" height="18" fill="#333"/>
-            <rect x="57" y="60" width="8" height="8" fill="#333"/>
-            <rect x="72" y="60" width="8" height="8" fill="#333"/>
-            <rect x="87" y="60" width="8" height="8" fill="#333"/>
-            <rect x="57" y="75" width="8" height="8" fill="#333"/>
-            <rect x="72" y="75" width="8" height="8" fill="#333"/>
-            <rect x="57" y="90" width="8" height="8" fill="#333"/>
+            <rect x="57" y="60" width="8" height="8" fill="#333"/><rect x="72" y="60" width="8" height="8" fill="#333"/>
+            <rect x="87" y="60" width="8" height="8" fill="#333"/><rect x="57" y="75" width="8" height="8" fill="#333"/>
+            <rect x="72" y="75" width="8" height="8" fill="#333"/><rect x="57" y="90" width="8" height="8" fill="#333"/>
             <rect x="87" y="75" width="8" height="25" fill="#333"/>
           </svg>
         </div>
         <div class="m-title-block">
           <div class="m-permit-type" id="m-permit-type">Work Permit</div>
-          <div class="m-meta-row">
-            <span id="m-formno">Form No: —</span>
-            <span id="m-revno">Rev. No: 1.0</span>
-            <span id="m-revdate">Rev. Date: 10 Jan 2024</span>
-          </div>
+          <div class="m-permit-subtype" id="m-permit-subtype"></div>
         </div>
         <div class="m-logo-block">
-          <img id="m-logo" alt="TotalEnvironment" style="height:28px;width:auto"/>
+          <img id="m-logo" alt="TotalEnvironment" style="height:26px;width:auto"/>
         </div>
       </div>
       <div class="m-header-bottom">
@@ -357,6 +299,7 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
     </div>
 
     <div class="m-body">
+
       <!-- Location & Duration -->
       <div class="m-two-col">
         <div class="m-col">
@@ -365,7 +308,6 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
             <div class="m-field"><div class="m-field-key">Project</div><div class="m-field-val" id="m-project">—</div></div>
             <div class="m-field"><div class="m-field-key">Tower / Phase</div><div class="m-field-val" id="m-tower">—</div></div>
             <div class="m-field"><div class="m-field-key">Unit No.</div><div class="m-field-val" id="m-unit">—</div></div>
-            <div class="m-field" id="m-loc-row" style="display:none"><div class="m-field-key">City / Timezone</div><div class="m-field-val" id="m-location">—</div></div>
           </div>
         </div>
         <div class="m-col">
@@ -381,26 +323,20 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
       <!-- Description -->
       <div class="m-section">
         <div class="m-section-title">Description of Work</div>
-        <div class="m-section-body">
-          <div class="m-field-val" id="m-desc" style="line-height:1.6">—</div>
-        </div>
+        <div class="m-section-body"><div class="m-field-val" id="m-desc" style="line-height:1.6;white-space:pre-line">—</div></div>
       </div>
 
       <!-- Work Details -->
       <div class="m-section">
         <div class="m-section-title">Work Details</div>
         <div class="m-section-body">
-          <div class="m-field" id="m-tools-row">
-            <div class="m-field-key">Tools, Equipment &amp; Machinery Used</div>
-            <div class="m-field-val" id="m-tools">—</div>
-          </div>
-          <div class="m-field" style="margin-top:10px">
-            <div class="m-field-key" style="margin-bottom:8px">Number of Workers Involved</div>
-            <div class="m-workers-row" id="m-workers-row">
+          <div class="m-field">
+            <div class="m-field-key">Number of Workers Involved</div>
+            <div class="m-workers-row" style="margin-top:6px" id="m-workers-row">
               <div class="m-workers-item"><div class="wnum" id="m-total-w">—</div><div class="wlbl">Total Workers</div></div>
-              <div class="m-workers-item" id="m-skilled-block" style="display:none"><div class="wnum" id="m-skilled">—</div><div class="wlbl">Skilled</div></div>
-              <div class="m-workers-item" id="m-unskilled-block" style="display:none"><div class="wnum" id="m-unskilled">—</div><div class="wlbl">Unskilled</div></div>
-              <div class="m-workers-item" id="m-supervisor-block" style="display:none"><div class="wnum" style="font-size:13px;padding-top:4px" id="m-supervisor">—</div><div class="wlbl">Supervisor</div></div>
+              <div class="m-workers-item" id="m-skilled-block"><div class="wnum" id="m-skilled">—</div><div class="wlbl">Skilled</div></div>
+              <div class="m-workers-item" id="m-unskilled-block"><div class="wnum" id="m-unskilled">—</div><div class="wlbl">Unskilled</div></div>
+              <div class="m-workers-item" id="m-supervisor-block"><div class="wnum" style="font-size:12px;padding-top:2px" id="m-supervisor">—</div><div class="wlbl">Supervisor</div></div>
             </div>
           </div>
           <div class="m-field" style="margin-top:10px" id="m-contractor-row">
@@ -410,100 +346,68 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
         </div>
       </div>
 
-      <!-- Hazards Identified -->
-      <div class="m-section">
-        <div class="m-section-title">Hazards Identified</div>
-        <div class="m-section-body">
-          <div style="font-size:10px;color:#888;margin-bottom:8px;font-style:italic">Hazardous conditions applicable to this work type:</div>
-          <div class="m-cb-grid">
-            <div class="m-cb-item"><div class="m-cb checked"></div>Fall from Height</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Unsafe Ladders / Scaffolding</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Materials falling from Height</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Unsafe Working Platform</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Vehicle Movement</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Hazardous, Flammable Materials</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Poor Housekeeping</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Improper Barricades</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Unprotected Sharp Edges</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Overhead Obstructions</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Electrocution</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Fire Hazard</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Manual Handling</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Slip, Trip &amp; Fall</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Exposed Cables</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Heavy Vehicles</div>
-          </div>
-          <div style="margin-top:10px;font-size:10px;color:#888;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Hazardous Activities</div>
-          <div class="m-cb-grid">
-            <div class="m-cb-item"><div class="m-cb checked"></div>Scaffolding Install/Dismantling</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Ladder Movement</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Lifting / Suspended Loads</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Welding</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Metal Cutting</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Masonry Work</div>
-          </div>
-        </div>
+      <!-- Hazards (rendered by permit type) -->
+      <div class="m-section" id="m-hazards-section">
+        <div class="m-section-title" id="m-hazards-title">Hazards Identified</div>
+        <div class="m-section-body" id="m-hazards-body"></div>
       </div>
 
       <!-- PPE Checklist -->
-      <div class="m-section">
+      <div class="m-section" id="m-ppe-section">
         <div class="m-section-title">PPE Checklist</div>
+        <div class="m-section-body" id="m-ppe-body"></div>
+      </div>
+
+      <!-- Safety Precautions (for permit types that have it) -->
+      <div class="m-section" id="m-precautions-section" style="display:none">
+        <div class="m-section-title">Safety Precautions</div>
+        <div class="m-section-body"><div class="m-field-val" id="m-precautions">—</div></div>
+      </div>
+
+      <!-- Permit Acknowledged -->
+      <div class="m-section">
+        <div class="m-section-title">Permit Acknowledged by HSSE In-Charge</div>
         <div class="m-section-body">
-          <div style="font-size:10px;color:#888;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Mandatory PPE</div>
-          <div class="m-cb-grid">
-            <div class="m-cb-item"><div class="m-cb checked"></div>Helmet</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Safety Shoes</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Face Mask</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Reflective Jacket</div>
-          </div>
-          <div style="margin-top:10px;font-size:10px;color:#888;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Fall Protection</div>
-          <div class="m-cb-grid">
-            <div class="m-cb-item"><div class="m-cb checked"></div>Full Body Harness</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Fall Arrest</div>
-          </div>
-          <div style="margin-top:10px;font-size:10px;color:#888;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Eye, Face &amp; Body Protection</div>
-          <div class="m-cb-grid">
-            <div class="m-cb-item"><div class="m-cb"></div>Goggles</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Face Shield</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Welding Mask</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Welding Apron</div>
-          </div>
-          <div style="margin-top:10px;font-size:10px;color:#888;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Hand &amp; Hearing Protection</div>
-          <div class="m-cb-grid">
-            <div class="m-cb-item"><div class="m-cb"></div>Cotton Gloves</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Leather Gloves</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Rubber Gloves</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Ear Plug</div>
-            <div class="m-cb-item"><div class="m-cb"></div>Ear Muff</div>
+          <div class="m-ack-grid">
+            <div class="m-ack-card">
+              <div class="m-ack-role">Approved by Area In-Charge</div>
+              <div class="m-ack-name" id="m-area-incharge">—</div>
+              <div class="m-ack-badge" id="m-area-badge">Approved</div>
+            </div>
+            <div class="m-ack-card">
+              <div class="m-ack-role">Approved by EHS In-Charge</div>
+              <div class="m-ack-name" id="m-ehs-incharge">—</div>
+              <div class="m-ack-badge" id="m-ehs-badge">Approved</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Raised By / Timeline -->
+      <!-- Timeline -->
       <div class="m-section">
-        <div class="m-section-title">Work Permit Proposal &amp; Timeline</div>
+        <div class="m-section-title">Work Permit Timeline</div>
         <div class="m-section-body">
           <ul class="m-timeline" id="m-timeline">
-            <li><div class="m-tl-dot"></div><div class="m-tl-text"><strong>Requested &amp; Submitted by</strong> <span id="m-raised-name">—</span></div></li>
-            <li><div class="m-tl-dot" style="background:#a06010"></div><div class="m-tl-text"><strong>Permit Start</strong><span id="m-tl-start">—</span></div></li>
-            <li><div class="m-tl-dot" style="background:#b83030"></div><div class="m-tl-text"><strong>Permit End</strong><span id="m-tl-end">—</span></div></li>
+            <li>
+              <div class="m-tl-dot m-tl-green"></div>
+              <div class="m-tl-text"><strong>Requested &amp; Submitted by</strong><span id="m-raised-name">—</span></div>
+            </li>
           </ul>
         </div>
       </div>
 
-      <!-- Night Work -->
-      <div class="m-section">
+      <!-- Night Work Checklist -->
+      <div class="m-section" id="m-night-section">
         <div class="m-section-title">Night Work Checklist</div>
-        <div class="m-section-body" style="display:flex;align-items:center;gap:14px;font-size:12px;color:#444">
-          <span>Emergency Power Backup and Response Teams available at Night?</span>
-          <div style="display:flex;gap:8px">
-            <span style="border:1px solid #ccc;border-radius:4px;padding:2px 10px;font-size:11px">YES</span>
-            <span style="border:1px solid #ccc;border-radius:4px;padding:2px 10px;font-size:11px">NO</span>
-            <span style="border:1px solid #ccc;border-radius:4px;padding:2px 10px;font-size:11px;background:#e0dbd4;font-weight:600">N/A</span>
+        <div class="m-section-body">
+          <div class="yn-row">
+            <span>Emergency Power Backup and Response Teams available at Night?</span>
+            <div class="yn-btns"><span class="yn-btn">YES</span><span class="yn-btn">NO</span><span class="yn-btn active">N/A</span></div>
           </div>
         </div>
       </div>
-    </div>
+
+    </div><!-- end m-body -->
 
     <div class="m-footer">
       <button class="btn-pdf" onclick="downloadPDF()">
@@ -518,19 +422,152 @@ main{max-width:1380px;margin:0 auto;padding:24px 24px 60px}
 <script>
 const CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vQ0DM28N6v5VcvqZ2mZWWDoEACvKUhwU3sC9ec_8Owm16L9Oxx84MVLr3MHeXP3Gk4eL_aj4LJbEEu8/pub?output=csv';
 
-// Column indices (0-based)
-const C={name:0,id:1,project:2,tower:3,loc:4,unit:5,start:6,status:7,workers:8,desc:9,tools:10,raised:11,contractor:12,skilled:13,unskilled:14,supervisor:15,end:16};
+// 0-based column indices
+// A=0 Name, B=1 ID, C=2 Project, D=3 Tower, E=4 City, F=5 Unit
+// G=6 Start, H=7 Status, I=8 Workers, J=9 Desc, K=10 Tools, L=11 RaisedBy
+// M=12 Contractor, N=13 Skilled, O=14 Unskilled, P=15 Supervisor, Q=16 End
+// R=17 EHSIncharge, S=18 AreaIncharge
+const C={name:0,id:1,project:2,tower:3,city:4,unit:5,start:6,status:7,workers:8,desc:9,tools:10,raised:11,contractor:12,skilled:13,unskilled:14,supervisor:15,end:16,ehs:17,area:18};
 
 const LOGO_DATA='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCADcApUDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3iiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiuc8fSSw+ANekgd0mWxlKNGSGB2nkEd6AOjor4j/tzxH/0FdV/8CJP8aDrviIDJ1XVAB3+0Sf40AfbmaM18QDxHrxOBrWo8/8AT0/+NP8A7c8R/wDQU1X/AMCJP8aAPtulr4rsdb8RHULYNqmqFTKuQbiT1HvX2oOlABRRRQAUUVh+IvF+heE1t31u/FotwWEWY2bcVxn7oPqKANyisHw74y0HxYbgaJfi7+zbfNxGy7d2cfeA9D+Vb1ABRRRQAUUUUAFFFfFOo+ItcXVLpV1nUAomcAC6fj5j70Afa1Gaq6YxbSbNmJLGBCST1+UV84+MF17XfjffeH9N1q5tPtEyrH/pDrGmIgx4U+xoA+mM0ZrwP/hTPj7/AKHJf/Aqf/Cj/hTPj7/ocl/8Cp/8KAPfKK8D/wCFM+Pf+hyX/wACp/8ACvcdNt5bTS7S2nk8yaGFI3fJO5goBPPqaALdFFFABRRRQAUUUUAFFFFABRQa8c+GFh4ptviNr82sQ6mmnuk32drov5ZPmgjbnjp6dqAPY6KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoorIv/E2iaXqUOm3+p2tteThTFBLIFdwxKjA9yCKANeiiigAooooAKKKKACi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WuE+FN7awfFbxpLLcwxxvLLtd5AA3789D3r2efxBo1tE0s+rWEUY6s9yigfiTQBo14z8evEhbTrHwjYFpL7UJUeaJOTsB+RSPVnwR/u+9XvGXxz0LR7eS30B11TUMYV1B8hD6k/xfQfnXmvhHxD4f0rWJvGfi/UH1TW5CXtrOBN5Rjxvc8KCBwFz8vpkDAB9CeF9Jh8J+DdP02SSNEsrYedKThd2Mu2T2ySa8X1W5l+NPxNtdPslk/4RzTMmSXoCmfmb2LkBVHXAz64LnVfHHxnuPsen2p0rw5uHmSMTsYA/xNxvP+yOOmfWvZfCHg/TPBmiLpumpnJ3TTsPnmf+8f6DoKAN6KNIYljjUJGihVVRgADoBT6KKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDy/xP8E9J8UeI7zWrjVb2Ga6ZWaOMJtGFC8ZHtWT/AMM56F/0G9R/75T/AAr2aigDxn/hnPQv+g3qP/fKf4Uf8M56F/0G9R/75T/CvZqKAPG4/wBnXw8sgMusam6d1Xy1J/Haa6jRPg94L0R1lXS/tkynIkvXMv8A47939K7yigBscaRRrHGioijCqowAPQCnUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB//9k=';
-
-// Set logos
 document.getElementById('hd-logo').src=LOGO_DATA;
 document.getElementById('m-logo').src=LOGO_DATA;
 
-let ALL=[];
-let dataReady=false;
-let currentRows=[];
-let activeIdx=-1;
+let ALL=[],dataReady=false,currentRows=[],activeIdx=-1;
+
+/* ── PERMIT TYPE DETECTION ── */
+function detectType(name){
+  const n=(name||'').toLowerCase();
+  if(n.includes('height')||n.includes('hgt')) return 'HGT';
+  if(n.includes('lifting')||n.includes('lft')) return 'LFT';
+  if(n.includes('night')||n.includes('ngt')) return 'NGT';
+  if(n.includes('confined')||n.includes('csp')||n.includes('space')) return 'CSP';
+  if(n.includes('hot work')||n.includes('hwp')) return 'HOT';
+  if(n.includes('electrical')||n.includes('ele')) return 'ELE';
+  if(n.includes('excavat')||n.includes('exc')) return 'EXC';
+  return 'GEN';
+}
+
+/* ── HAZARD SETS per permit type ── */
+const HAZARDS={
+  HGT:[
+    ['Fall from Height',true],['Unsafe Ladders / Scaffolding',false],['Materials falling from Height',false],
+    ['Unsafe Working Platform',false],['Vehicle Movement',false],['Hazardous, Flammable Materials',false],
+    ['Poor Housekeeping',false],['Improper Barricades',false],['Unprotected Sharp Edges',false],
+    ['Overhead Obstructions',false],['Electrocution',false],['Fire Hazard',false],
+    ['Manual Handling',false],['Slip, Trip & Fall',false],['Exposed Cables',false],['Heavy Vehicles',false]
+  ],
+  LFT:[
+    ['Area Barricade',true],['Safety Signs',true],['Fully Extended Outrigger',true],
+    ['Use of Outrigger Pad',true],['Traffic Control',false],['Lifting Tools',true],
+    ['Adjacent Structures',true],['Functional Warning Alarms',true],['Taglines',false],
+    ['Adequate Illumination',true],['Overhead Power Lines',false],['Weather Conditions',true],
+    ['Aviation Lights',true],['Load Chart in Cabin',true],['Swivel Hook Condition',false],
+    ['Lifting Tools Condition',true],['D-Shackles',true],['Stability of Ground',false],
+    ['Fall Arrestor with Polyamide Rope',true],['Load Stability',true],['Functional Safety Limit Switch',false],
+    ['Safety Latch Intact',false],['Site Induction for Lifting Crew',false],["Windscreen Condition (Operator's Cabin)",false]
+  ],
+  NGT:[
+    ['Fatigue',false],['Sleepiness on the job',false],['Stress',false],
+    ['Sleep Deprivation',false],['Excessive Heat or Cold',false],['Working Overtime',false],
+    ['Hazardous, Flammable Material',false],['Accumulation of Debris',false],['Poor Housekeeping',false],
+    ['Improper Illumination',false],['Unprotected Sharp Edges',false],['Walkway Obstructions',false],
+    ['Lone Work',false],['Electrocution',false],['Fire Hazard',false],
+    ['Manual Handling',false],['Slip, Trip and Fall',false],['Exposed Cables',false],['Heavy Vehicles',false]
+  ],
+  CSP:[
+    ['Lack of Oxygen',false],['Gases, Fumes & Vapours',false],['Dust',true],
+    ['Access Restrictions',false],['Excessive Heat',false],['Hazardous, Flammable Materials',false],
+    ['Accumulation of Debris',false],['Poor Housekeeping',false],['Low / Improper or No Illumination',false],
+    ['Unprotected Sharp Edges',false],['Overhead Obstructions',false],['Electrocution',false],
+    ['Fire Hazard',false],['Manual Handling',false],['Slip, Trip & Fall',false],
+    ['Exposed Cables',false],['Heavy Vehicles',false]
+  ]
+};
+const ACTIVITIES={
+  HGT:[['Scaffolding Installation/Dismantling',true],['Ladder Movement',false],['Lifting / Suspended Loads',false],['Welding',false],['Metal Cutting',false],['Masonry Work',false]],
+  NGT:[['Using unguarded machinery',false],['Grinding, Chipping',false],['Welding, Gas Cutting Equipment',false],['Metal Cutting',false],['Masonry Work',false],['Others',false]],
+  CSP:[['Using unguarded Machinery',false],['Grinding, Chipping',true],['Welding, Gas Cutting Equipment',false],['Metal Cutting',false],['Masonry Work',false],['Multi-Level Work',false]],
+  LFT:null
+};
+
+/* ── PPE SETS per permit type ── */
+const PPE_SETS={
+  HGT:{
+    mandatory:[['Helmet',true],['Safety Shoes',false],['Face Mask',false],['Reflective Jacket',false]],
+    eye:[['Goggles',false],['Face Shield',false],['Welding Mask',false],['Welding Apron',false]],
+    fall:[['Full Body Harness',true],['Fall Arrest',false]],
+    hand:[['Cotton Gloves',false],['Leather Gloves',false],['Rubber Gloves',false]],
+    hearing:[['Ear Plug',false],['Ear Muff',false]]
+  },
+  LFT:{
+    mandatory:[['Helmet',true],['Safety Shoes',true],['Face Mask',true],['Reflective Jacket',true]],
+    eye:[['Goggles',false],['Face Shield',false],['Welding Mask',false],['Welding Apron',false]],
+    fall:[['Full Body Harness',true],['Fall Arrest',true]],
+    hand:[['Cotton Gloves',true],['Leather Gloves',true],['Rubber Gloves',true]],
+    hearing:[['Ear Plug',false],['Ear Muff',false]]
+  },
+  NGT:{
+    mandatory:[['Helmet',true],['Safety Shoes',true],['Face Mask',true],['Reflective Jacket',true]],
+    eye:[['Goggles',false],['Face Shield',false],['Welding Mask',false],['Welding Apron',false]],
+    fall:[['Full Body Harness',false],['Fall Arrest',false]],
+    hand:[['Cotton Gloves',false],['Leather Gloves',false],['Rubber Gloves',false]],
+    hearing:[['Ear Plugs',false],['Ear Muffs',false]]
+  },
+  CSP:{
+    mandatory:[['Helmet',true],['Safety Shoes',true],['Face Mask',true],['Reflective Jacket',true]],
+    eye:[['Goggles',true],['Face Shield',false],['Welding Mask',false],['Welding Apron',false]],
+    fall:[['Full Body Harness',true],['Fall Arrester',false]],
+    hand:[['Cotton Gloves',false],['Leather Gloves',true],['Rubber Gloves',true]],
+    hearing:[['Ear Plug',false],['Ear Muff',false]]
+  }
+};
+
+function cbGrid(items,cols){
+  const cl=cols===2?'m-cb-grid-2':'m-cb-grid';
+  return `<div class="${cl}">${items.map(([n,c])=>`<div class="m-cb-item"><div class="m-cb${c?' chk':''}"></div>${n}</div>`).join('')}</div>`;
+}
+
+function buildHazards(type){
+  const hlist=HAZARDS[type]||HAZARDS.HGT;
+  const acts=ACTIVITIES[type];
+  let html=cbGrid(hlist,3);
+  if(acts){
+    html+=`<div class="m-sub-label" style="margin-top:10px">Hazardous Activities</div>`;
+    html+=cbGrid(acts,3);
+  }
+  // Lifting has extra risk assessment row
+  if(type==='LFT'){
+    html+=`<div style="margin-top:10px"><div class="yn-row"><span>Risk Assessment done?</span><div class="yn-btns"><span class="yn-btn active">YES</span><span class="yn-btn">NO</span><span class="yn-btn">N/A</span></div></div></div>`;
+  }
+  if(type==='CSP'){
+    html+=`<div style="margin-top:10px"><div class="yn-row"><span>Risk Assessment Done (together with Performing Party)</span><div class="yn-btns"><span class="yn-btn active">YES</span><span class="yn-btn">NO</span><span class="yn-btn">N/A</span></div></div></div>`;
+  }
+  if(type==='NGT'){
+    html+=`<div style="margin-top:10px"><div class="yn-row"><span>Has Risk Assessment been done?</span><div class="yn-btns"><span class="yn-btn active">YES</span><span class="yn-btn">NO</span><span class="yn-btn">N/A</span></div></div></div>`;
+  }
+  return html;
+}
+
+function buildPPE(type){
+  const p=PPE_SETS[type]||PPE_SETS.HGT;
+  return `
+    <div class="m-sub-label">Mandatory PPE</div>
+    ${cbGrid(p.mandatory,3)}
+    <div class="m-sub-label">Eye, Face &amp; Body Protection</div>
+    ${cbGrid(p.eye,3)}
+    <div class="m-sub-label">Fall Protection</div>
+    ${cbGrid(p.fall,2)}
+    <div class="m-sub-label">Hand Protection</div>
+    ${cbGrid(p.hand,3)}
+    <div class="m-sub-label">Hearing Protection</div>
+    ${cbGrid(p.hearing,2)}`;
+}
+
+/* ── HAZARDS TITLE per type ── */
+const HAZARD_TITLES={HGT:'Hazards Identified',LFT:'Control Measures',NGT:'Hazards Identified',CSP:'Hazards Identified',GEN:'Hazards Identified'};
+const TYPE_LABELS={HGT:'Height Work Permit',LFT:'Lifting Work Permit',NGT:'Night Work Permit',CSP:'Confined Space Entry',HOT:'Hot Work Permit',ELE:'Electrical Work Permit',EXC:'Excavation Work Permit',GEN:'General Work Permit'};
+const FORM_NOS={HGT:'WP-HGT',LFT:'WP-LFT',NGT:'WP-NGT',CSP:'WP-CSP',HOT:'WP-HOT',ELE:'WP-ELE',EXC:'WP-EXC',GEN:'WP-GEN'};
 
 /* ── CSV PARSER ── */
 function parseCSV(txt){
@@ -549,17 +586,13 @@ function parseCSV(txt){
   return rows;
 }
 
-/* ── DATE PARSER → YYYYMMDD integer ── */
+/* ── DATE PARSER ── */
 const MON={jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
 function toYMD(raw){
   if(!raw)return null;const s=String(raw).trim();if(!s)return null;let m;
-  // "02 Jan, 2026, Fri, 08:02 am"
   if((m=s.match(/^(\d{1,2})\s+([A-Za-z]{3}),?\s*(\d{4})/))){const mon=MON[m[2].toLowerCase()];if(mon)return ymd(+m[3],mon,+m[1]);}
-  // DD-Mon-YYYY
   if((m=s.match(/^(\d{1,2})[\-\s]([A-Za-z]{3})[\-\s](\d{2,4})/))){const mon=MON[m[2].toLowerCase()];if(mon){let yr=+m[3];if(yr<100)yr+=2000;return ymd(yr,mon,+m[1]);}}
-  // YYYY-MM-DD
   if((m=s.match(/^(\d{4})[\-\/](\d{1,2})[\-\/](\d{1,2})/)))return ymd(+m[1],+m[2],+m[3]);
-  // DD/MM/YYYY
   if((m=s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/)))return ymd(+m[3],+m[2],+m[1]);
   if(/^\d{5}$/.test(s)){const d=new Date(Math.round((+s-25569)*86400000));if(!isNaN(d))return ymd(d.getFullYear(),d.getMonth()+1,d.getDate());}
   return null;
@@ -588,7 +621,7 @@ function buildProjectDD(){
   const sel=document.getElementById('selProject');
   while(sel.options.length>1)sel.remove(1);
   const seen=new Set();
-  for(const{cols}of ALL){const p=(cols[C.project]||'').trim();if(!p)continue;if(/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)/i.test(p)||/^\d{1,2}[:/]\d{2}/.test(p)||/^project/i.test(p))continue;seen.add(p);}
+  for(const{cols}of ALL){const p=(cols[C.project]||'').trim();if(!p||/^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)/i.test(p)||/^\d{1,2}[:/]\d{2}/.test(p)||/^project/i.test(p))continue;seen.add(p);}
   [...seen].sort((a,b)=>a.localeCompare(b)).forEach(p=>{const o=document.createElement('option');o.value=o.textContent=p;sel.appendChild(o);});
 }
 
@@ -622,7 +655,7 @@ function resetFilters(){
   if(dataReady)showPlaceholder();
 }
 
-/* ── STATUS HELPERS ── */
+/* ── STATUS ── */
 function sKey(s){if(!s)return 'oth';const l=s.toLowerCase();if(l.includes('open'))return 'open';if(l.includes('progress'))return 'prog';if(l.includes('clos'))return 'close';if(l.includes('expir'))return 'exp';if(l.includes('pend'))return 'pend';return 'oth';}
 const STRIP={open:'s-open',prog:'s-prog',close:'s-close',exp:'s-exp',pend:'s-pend',oth:'s-oth'};
 const BADGE={open:'b-open',prog:'b-prog',close:'b-close',exp:'b-exp',pend:'b-pend',oth:'b-oth'};
@@ -639,12 +672,10 @@ function renderCards(rows){
     area.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>No permits match your filters.</p></div>`;
     return;
   }
-  let totW=0,opn=0,prg=0;
-  for(const{cols}of rows){totW+=(parseInt(cols[C.workers])||0);const k=sKey(cols[C.status]);if(k==='open')opn++;if(k==='prog')prg++;}
+  let totW=0;
+  for(const{cols}of rows)totW+=(parseInt(cols[C.workers])||0);
   document.getElementById('sTot').textContent=rows.length;
   document.getElementById('sWrk').textContent=totW;
-  document.getElementById('sOpn').textContent=opn;
-  document.getElementById('sPrg').textContent=prg;
   statsEl.style.display='flex';secH.style.display='flex';
   cntBdg.textContent=rows.length+' Result'+(rows.length!==1?'s':'');
 
@@ -688,58 +719,74 @@ function renderCards(rows){
   area.innerHTML=`<div class="grid">${parts.join('')}</div>`;
 }
 
-/* ── MODAL OPEN / CLOSE ── */
+/* ── MODAL OPEN ── */
 function openModal(idx){
   activeIdx=idx;
   const{cols}=currentRows[idx];
+  const ptype=detectType(cols[C.name]);
   const sk=sKey(cols[C.status]);
 
-  // Permit type
-  document.getElementById('m-permit-type').textContent=cols[C.name]||'Work Permit';
-
-  // Form no (derive from name if possible)
-  const nm=(cols[C.name]||'').toLowerCase();
-  let formNo='WP-GEN';
-  if(nm.includes('height')||nm.includes('hgt'))formNo='WP-HGT';
-  else if(nm.includes('hot')||nm.includes('fire'))formNo='WP-HOT';
-  else if(nm.includes('confined')||nm.includes('space'))formNo='WP-CSE';
-  else if(nm.includes('electrical'))formNo='WP-ELE';
-  else if(nm.includes('excavat'))formNo='WP-EXC';
-  document.getElementById('m-formno').textContent='Form No: '+formNo;
+  // Header
+  document.getElementById('m-permit-type').textContent=TYPE_LABELS[ptype]||cols[C.name]||'Work Permit';
+  document.getElementById('m-permit-subtype').textContent='Form No: '+(FORM_NOS[ptype]||'WP-GEN');
+  document.getElementById('m-permit-no').textContent=cols[C.id]||'—';
 
   // Status pill
   const pill=document.getElementById('m-status-pill');
-  pill.textContent=cols[C.status]||'Unknown';
-  pill.className='m-status-pill '+(sk==='open'?'pill-approved':sk==='pend'?'pill-pending':'pill-other');
+  const st=cols[C.status]||'Unknown';
+  pill.textContent=st;
+  const stl=st.toLowerCase();
+  pill.className='m-status-pill '+(stl.includes('approv')?'pill-approved':stl.includes('clos')?'pill-closed':stl.includes('pend')?'pill-pending':'pill-other');
 
-  document.getElementById('m-permit-no').textContent=cols[C.id]||'—';
+  // Location
   document.getElementById('m-project').textContent=cols[C.project]||'—';
   document.getElementById('m-tower').textContent=cols[C.tower]||'—';
   document.getElementById('m-unit').textContent=cols[C.unit]||'—';
+
+  // Duration
   document.getElementById('m-start').textContent=cols[C.start]||'—';
   document.getElementById('m-end').textContent=cols[C.end]||'—';
+
+  // Description
   document.getElementById('m-desc').textContent=cols[C.desc]||'—';
+
+  // Workers
   document.getElementById('m-total-w').textContent=cols[C.workers]||'—';
-  document.getElementById('m-tools').textContent=cols[C.tools]||'—';
-  document.getElementById('m-contractor').textContent=cols[C.contractor]||'—';
-
-  // Optional columns
-  const loc=cols[C.loc]||'';
-  document.getElementById('m-loc-row').style.display=loc?'block':'none';
-  document.getElementById('m-location').textContent=loc;
-
   const skilled=cols[C.skilled]||'';const unskilled=cols[C.unskilled]||'';const sup=cols[C.supervisor]||'';
-  document.getElementById('m-skilled-block').style.display=skilled?'block':'none';
-  document.getElementById('m-unskilled-block').style.display=unskilled?'block':'none';
-  document.getElementById('m-supervisor-block').style.display=sup?'block':'none';
+  document.getElementById('m-skilled-block').style.display=skilled?'':'none';
+  document.getElementById('m-unskilled-block').style.display=unskilled?'':'none';
+  document.getElementById('m-supervisor-block').style.display=sup?'':'none';
   document.getElementById('m-skilled').textContent=skilled;
   document.getElementById('m-unskilled').textContent=unskilled;
   document.getElementById('m-supervisor').textContent=sup;
 
+  // Contractor
+  document.getElementById('m-contractor').textContent=cols[C.contractor]||'—';
+
+  // Hazards (dynamic per type)
+  const htype=(['HGT','LFT','NGT','CSP'].includes(ptype))?ptype:'HGT';
+  document.getElementById('m-hazards-title').textContent=HAZARD_TITLES[htype]||'Hazards Identified';
+  document.getElementById('m-hazards-body').innerHTML=buildHazards(htype);
+
+  // PPE
+  document.getElementById('m-ppe-body').innerHTML=buildPPE(htype);
+
+  // Permit Acknowledged (cols R=17, S=18)
+  const areaIC=cols[C.area]||'—';
+  const ehsIC=cols[C.ehs]||'—';
+  document.getElementById('m-area-incharge').textContent=areaIC;
+  document.getElementById('m-ehs-incharge').textContent=ehsIC;
+
   // Timeline
   document.getElementById('m-raised-name').textContent=cols[C.raised]||'—';
-  document.getElementById('m-tl-start').textContent=cols[C.start]?' — '+cols[C.start]:'—';
-  document.getElementById('m-tl-end').textContent=cols[C.end]?' — '+cols[C.end]:'—';
+
+  // Night work section – show always (it's standard on all permits)
+  document.getElementById('m-night-section').style.display='';
+
+  // CSP: show Safety Precautions if present
+  const prec=document.getElementById('m-precautions-section');
+  // (not a separate column in sheet, keep hidden unless we have data)
+  prec.style.display='none';
 
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow='hidden';
@@ -753,137 +800,125 @@ function closeModal(){
 
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-/* ── PDF GENERATION ── */
+/* ── PDF DOWNLOAD ── */
 function downloadPDF(){
   if(activeIdx<0)return;
   const{cols}=currentRows[activeIdx];
+  const ptype=detectType(cols[C.name]);
   const{jsPDF}=window.jspdf;
   const doc=new jsPDF({format:'a4',unit:'mm'});
-  const pw=210,ph=297,mg=12,cw=pw-2*mg;
+  const pw=210,mg=12,cw=pw-2*mg;
   let y=mg;
 
-  const txt=(idx,fb='—')=>(cols[idx]||'').trim()||fb;
-  const line=(x1,y1,x2,y2)=>{doc.line(x1,y1,x2,y2);};
-  const rect=(x,ry,w,h,fill)=>{if(fill)doc.setFillColor(...fill);doc.rect(x,ry,w,h,fill?'FD':'S');};
-  const label=(text,x,ry,color=[100,100,100])=>{doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.setTextColor(...color);doc.text(text,x,ry);};
-  const val=(text,x,ry,fs=10,bold=false)=>{doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(fs);doc.setTextColor(20,20,20);doc.text(String(text),x,ry);};
-  const sectionHdr=(title,x,ry,w)=>{rect(x,ry,w,7,[235,235,235]);doc.setDrawColor(180,180,180);rect(x,ry,w,7);label(title.toUpperCase(),x+3,ry+5,[60,60,60]);return ry+7;};
-  const cb=(x,ry,checked)=>{doc.setDrawColor(150,150,150);rect(x,ry,4,4);if(checked){doc.setTextColor(45,122,71);doc.setFont('helvetica','bold');doc.setFontSize(8);doc.text('✓',x+0.5,ry+3.2);}};
+  const t=(i,fb='—')=>(cols[i]||'').trim()||fb;
+  const ln=(x1,y1,x2,y2,c=[180,180,180])=>{doc.setDrawColor(...c);doc.line(x1,y1,x2,y2)};
+  const bx=(x,ry,w,h,fill)=>{if(fill)doc.setFillColor(...fill);doc.setDrawColor(180,180,180);doc.rect(x,ry,w,h,fill?'FD':'S')};
+  const lbl=(txt,x,ry,c=[110,110,110])=>{doc.setFont('helvetica','bold');doc.setFontSize(7);doc.setTextColor(...c);doc.text(txt,x,ry)};
+  const val=(txt,x,ry,fs=9,bold=false)=>{doc.setFont('helvetica',bold?'bold':'normal');doc.setFontSize(fs);doc.setTextColor(20,20,20);doc.text(String(txt),x,ry)};
+  const secHdr=(title,x,ry,w)=>{doc.setFillColor(238,238,238);doc.setDrawColor(180,180,180);doc.rect(x,ry,w,7,'FD');lbl(title,x+3,ry+5,[60,60,60]);return ry+7};
+  const cb=(x,ry,checked)=>{doc.setDrawColor(160,160,160);doc.setFillColor(255,255,255);doc.rect(x,ry,3.8,3.8,'FD');if(checked){doc.setTextColor(45,122,71);doc.setFont('helvetica','bold');doc.setFontSize(7.5);doc.text('✓',x+0.3,ry+3.2)}};
+  const cbRow=(items,sx,sy,colW)=>{let cx=sx,cy=sy,col=0;const perRow=3;items.forEach(([name,chk])=>{cb(cx,cy,chk);doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(30,30,30);doc.text(name,cx+5,cy+3.2);col++;if(col===perRow){col=0;cy+=6;cx=sx}else cx+=colW});return cy+(col>0?6:0)};
 
-  // ── OUTER BORDER ──
-  doc.setDrawColor(180,180,180);rect(mg,y,cw,36);
-
-  // QR placeholder
-  doc.setFillColor(245,245,245);doc.rect(mg,y,24,36,'F');
-  doc.setDrawColor(180,180,180);doc.rect(mg,y,24,36);
-  doc.setFontSize(5.5);doc.setTextColor(130,130,130);doc.text('QR CODE',mg+12,y+20,{align:'center'});
-
+  // HEADER BOX
+  bx(mg,y,cw,34);
+  doc.setFillColor(248,248,248);doc.rect(mg,y,22,34,'F');
+  doc.setDrawColor(180,180,180);doc.line(mg+22,y,mg+22,y+34);
+  doc.setFontSize(5);doc.setTextColor(160,160,160);doc.text('QR',mg+11,y+20,{align:'center'});
   // Title
-  doc.setFont('helvetica','bold');doc.setFontSize(14);doc.setTextColor(20,20,20);
-  doc.text(txt(C.name,'Work Permit'),mg+24+(cw-24-48)/2,y+12,{align:'center'});
-
-  // Meta row
-  const nm=(txt(C.name)).toLowerCase();
-  let fno='WP-GEN';
-  if(nm.includes('height')||nm.includes('hgt'))fno='WP-HGT';
-  else if(nm.includes('hot')||nm.includes('fire'))fno='WP-HOT';
-  else if(nm.includes('confined'))fno='WP-CSE';
-  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(70,70,70);
-  doc.text('Form No: '+fno,mg+26,y+19);
-  doc.text('Rev. No: 1.0',mg+65,y+19);
-  doc.text('Rev. Date: 10 Jan 2024',mg+95,y+19);
-
+  doc.setFont('helvetica','bold');doc.setFontSize(13);doc.setTextColor(20,20,20);
+  doc.text(TYPE_LABELS[ptype]||t(C.name),mg+22+(cw-22-44)/2+22,y+12,{align:'center'});
+  doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(80,80,80);
+  doc.text('Form No: '+(FORM_NOS[ptype]||'WP-GEN'),mg+24,y+20);
+  // Logo
+  doc.setFillColor(255,255,255);doc.rect(pw-mg-42,y+2,40,30,'F');
+  try{doc.addImage(LOGO_DATA,'JPEG',pw-mg-41,y+9,39,13)}catch(e){}
+  ln(pw-mg-42,y,pw-mg-42,y+34);
   // Status + Permit No
-  doc.setFont('helvetica','bold');doc.setFontSize(8.5);doc.setTextColor(20,20,20);
-  doc.text('Status: '+txt(C.status),mg+26,y+28);
-  doc.text('Permit No: '+txt(C.id),mg+95,y+28);
+  doc.setFont('helvetica','bold');doc.setFontSize(8);doc.setTextColor(20,20,20);
+  doc.text('Status: '+t(C.status),mg+24,y+28);
+  doc.text('Permit No: '+t(C.id),mg+24+(cw-22-44)/2,y+28);
+  y+=36;
 
-  // Logo area
-  doc.setFillColor(255,255,255);doc.rect(pw-mg-46,y+2,44,32,'F');
-  try{doc.addImage(LOGO_DATA,'JPEG',pw-mg-45,y+9,43,14);}catch(e){}
-
-  // Separator lines
-  line(mg+24,y,mg+24,y+36);line(pw-mg-46,y,pw-mg-46,y+36);
-  line(mg,y+14,pw-mg-46,y+14);
-  y+=38;
-
-  // ── LOCATION / DURATION ──
-  const rowH=34;doc.setDrawColor(180,180,180);rect(mg,y,cw,rowH);
-  line(mg+cw/2,y,mg+cw/2,y+rowH);
-  const ry2=sectionHdr('Location of Work',mg,y,cw/2);
-  sectionHdr('Duration of Work',mg+cw/2,y,cw/2);
-  label('PROJECT',mg+3,ry2+5);val(txt(C.project),mg+3,ry2+10,8.5);
-  label('TOWER / PHASE',mg+3,ry2+16);val(txt(C.tower),mg+3,ry2+21,8.5);
-  label('UNIT NO.',mg+3,ry2+26.5);val(txt(C.unit),mg+3,ry2+31.5,8.5,false);
+  // LOCATION / DURATION
+  bx(mg,y,cw,32);ln(mg+cw/2,y,mg+cw/2,y+32);
+  secHdr('LOCATION OF WORK',mg,y,cw/2);secHdr('DURATION OF WORK',mg+cw/2,y,cw/2);
+  lbl('PROJECT',mg+3,y+13);val(t(C.project),mg+3,y+18,8.5);
+  lbl('TOWER / PHASE',mg+3,y+22);val(t(C.tower),mg+3,y+27,8);
   const lx=mg+cw/2+3;
-  label('START TIME',lx,ry2+5);val(txt(C.start),lx,ry2+10,8);
-  label('END TIME',lx,ry2+16);val(txt(C.end),lx,ry2+21,8);
-  label('EXTENDED',lx,ry2+26.5);val('NO',lx,ry2+31.5,8.5);
-  y+=rowH+3;
+  lbl('START TIME',lx,y+13);val(t(C.start),lx,y+18,8);
+  lbl('END TIME',lx,y+22);val(t(C.end),lx,y+27,8);
+  y+=34;
 
-  // ── DESCRIPTION ──
-  rect(mg,y,cw,18);
-  const dy=sectionHdr('Description of Work',mg,y,cw);
+  // DESCRIPTION
+  bx(mg,y,cw,18);const dy=secHdr('DESCRIPTION OF WORK',mg,y,cw);
   doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(20,20,20);
-  const descLines=doc.splitTextToSize(txt(C.desc),cw-6);
-  doc.text(descLines.slice(0,2),mg+3,dy+5);
-  y+=21;
+  doc.text(doc.splitTextToSize(t(C.desc),cw-6).slice(0,2),mg+3,dy+5);
+  y+=20;
 
-  // ── WORK DETAILS ──
-  rect(mg,y,cw,32);
-  const wdy=sectionHdr('Work Details',mg,y,cw);
-  label('TOOLS, EQUIPMENT & MACHINERY USED',mg+3,wdy+5);
-  val(txt(C.tools,'—'),mg+3,wdy+10,8.5);
-  label('NO. OF WORKERS',mg+3,wdy+16);val(txt(C.workers,'—'),mg+3,wdy+21,9,true);
-  label('RAISED BY',mg+50,wdy+16);val(txt(C.raised,'—'),mg+50,wdy+21,9,true);
-  label("CONTRACTOR'S NAME",mg+3,wdy+27);val(txt(C.contractor,'—'),mg+3,wdy+32,8.5);
-  y+=35;
+  // WORK DETAILS
+  bx(mg,y,cw,30);const wdy=secHdr('WORK DETAILS',mg,y,cw);
+  lbl('NO. OF WORKERS',mg+3,wdy+5);val(t(C.workers,'—'),mg+3,wdy+10,10,true);
+  lbl('RAISED BY',mg+50,wdy+5);val(t(C.raised,'—'),mg+50,wdy+10,9,true);
+  const sk2=t(C.skilled);const us=t(C.unskilled);const sup=t(C.supervisor);
+  if(sk2)  {lbl('SKILLED',mg+80,wdy+5);val(sk2,mg+80,wdy+10,9)}
+  if(us)   {lbl('UNSKILLED',mg+100,wdy+5);val(us,mg+100,wdy+10,9)}
+  if(sup)  {lbl('SUPERVISOR',mg+120,wdy+5);val(sup,mg+120,wdy+10,8)}
+  lbl("CONTRACTOR'S NAME",mg+3,wdy+17);val(t(C.contractor,'—'),mg+3,wdy+22,8.5);
+  y+=32;
 
-  // ── HAZARDS ──
-  rect(mg,y,cw,44);
-  const hdy=sectionHdr('Hazards Identified',mg,y,cw);
-  const hazards=[['Fall from Height',true],['Unsafe Ladders / Scaffolding',false],['Materials falling from Height',false],
-    ['Unsafe Working Platform',false],['Vehicle Movement',false],['Hazardous Materials',false],
-    ['Poor Housekeeping',false],['Improper Barricades',false],['Unprotected Sharp Edges',false],
-    ['Overhead Obstructions',false],['Electrocution',false],['Fire Hazard',false],
-    ['Manual Handling',false],['Slip, Trip & Fall',false],['Exposed Cables',false]];
-  let hx=mg+3,hy=hdy+5,hcol=0;
-  hazards.forEach(([name,chk])=>{
-    cb(hx,hy,chk);
-    doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(30,30,30);
-    doc.text(name,hx+5,hy+3.2);
-    hcol++;if(hcol===3){hcol=0;hy+=7;hx=mg+3;}else{hx+=cw/3;}
-  });
-  y+=47;
+  // HAZARDS
+  const htype2=(['HGT','LFT','NGT','CSP'].includes(ptype))?ptype:'HGT';
+  const hlist=HAZARDS[htype2]||HAZARDS.HGT;
+  const hRows=Math.ceil(hlist.length/3);
+  const hH=8+hRows*6+2;
+  bx(mg,y,cw,hH);const hdy=secHdr(HAZARD_TITLES[htype2]||'HAZARDS IDENTIFIED',mg,y,cw);
+  cbRow(hlist,mg+3,hdy+2,cw/3);
+  y+=hH+2;
 
-  // ── PPE ──
-  rect(mg,y,cw,32);
-  const pdy=sectionHdr('PPE Checklist',mg,y,cw);
-  const ppe=[['Helmet',true],['Safety Shoes',false],['Face Mask',false],['Reflective Jacket',false],
-    ['Full Body Harness',true],['Fall Arrest',false],['Goggles',false],['Cotton Gloves',false],
-    ['Leather Gloves',false],['Rubber Gloves',false],['Ear Plug',false],['Ear Muff',false]];
-  let px=mg+3,py=pdy+5,pc=0;
-  ppe.forEach(([name,chk])=>{
-    cb(px,py,chk);
-    doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(30,30,30);
-    doc.text(name,px+5,py+3.2);
-    pc++;if(pc===4){pc=0;py+=7;px=mg+3;}else{px+=cw/4;}
-  });
-  y+=35;
-
-  // ── TIMELINE ──
-  if(y+30<ph-mg){
-    rect(mg,y,cw,28);
-    const tdy=sectionHdr('Work Permit Timeline',mg,y,cw);
-    doc.setFillColor(45,122,71);doc.circle(mg+6,tdy+5.5,2,'F');
-    val('Requested & Submitted by '+txt(C.raised,'—')+' — '+txt(C.start,'—'),mg+11,tdy+6,8);
-    doc.setFillColor(160,96,16);doc.circle(mg+6,tdy+12.5,2,'F');
-    val('Permit Start: '+txt(C.start,'—'),mg+11,tdy+13,8);
-    doc.setFillColor(184,48,48);doc.circle(mg+6,tdy+19.5,2,'F');
-    val('Permit End: '+txt(C.end,'—'),mg+11,tdy+20,8);
+  // ACTIVITIES (if applicable)
+  const acts=ACTIVITIES[htype2];
+  if(acts){
+    const aH=8+Math.ceil(acts.length/3)*6+2;
+    bx(mg,y,cw,aH);const ady=secHdr('HAZARDOUS ACTIVITIES',mg,y,cw);
+    cbRow(acts,mg+3,ady+2,cw/3);
+    y+=aH+2;
   }
 
-  doc.save('WorkPermit_'+txt(C.id,'permit')+'.pdf');
+  // PPE
+  const pp=PPE_SETS[htype2]||PPE_SETS.HGT;
+  const allPPE=[...pp.mandatory,...pp.fall,...pp.eye,...pp.hand,...pp.hearing];
+  const pRows=Math.ceil(allPPE.length/4);
+  const pH=8+pRows*6+2;
+  bx(mg,y,cw,pH);const pdy=secHdr('PPE CHECKLIST',mg,y,cw);
+  let px=mg+3,py=pdy+2,pc=0;
+  allPPE.forEach(([name,chk])=>{cb(px,py,chk);doc.setFont('helvetica','normal');doc.setFontSize(7.5);doc.setTextColor(30,30,30);doc.text(name,px+5,py+3.2);pc++;if(pc===4){pc=0;py+=6;px=mg+3}else px+=cw/4});
+  y+=pH+2;
+
+  // PERMIT ACKNOWLEDGED
+  if(y+26<297-mg){
+    bx(mg,y,cw,24);const aHdy=secHdr('PERMIT ACKNOWLEDGED BY HSSE IN-CHARGE',mg,y,cw);
+    ln(mg+cw/2,y,mg+cw/2,y+24);
+    lbl('APPROVED BY AREA IN-CHARGE',mg+3,aHdy+5);
+    val(t(C.area,'—'),mg+3,aHdy+11,9,true);
+    doc.setFillColor(234,245,238);doc.rect(mg+3,aHdy+13,30,5,'F');
+    doc.setFontSize(7.5);doc.setTextColor(45,122,71);doc.text('Approved',mg+3+1,aHdy+16.5);
+    lbl('APPROVED BY EHS IN-CHARGE',mg+cw/2+3,aHdy+5);
+    val(t(C.ehs,'—'),mg+cw/2+3,aHdy+11,9,true);
+    doc.setFillColor(234,245,238);doc.rect(mg+cw/2+3,aHdy+13,30,5,'F');
+    doc.setFontSize(7.5);doc.setTextColor(45,122,71);doc.text('Approved',mg+cw/2+3+1,aHdy+16.5);
+    y+=26;
+  }
+
+  // TIMELINE
+  if(y+22<297-mg){
+    bx(mg,y,cw,20);const tdy=secHdr('WORK PERMIT TIMELINE',mg,y,cw);
+    doc.setFillColor(45,122,71);doc.circle(mg+6,tdy+5,2,'F');
+    val('Requested & Submitted by '+t(C.raised,'—'),mg+11,tdy+5.5,8);
+    doc.setFillColor(45,122,71);doc.circle(mg+6,tdy+12,2,'F');
+    val('Permit Period: '+t(C.start,'—')+' → '+t(C.end,'—'),mg+11,tdy+12.5,8);
+  }
+
+  doc.save('WorkPermit_'+t(C.id,'permit')+'_'+t(C.name,'WP')+'.pdf');
 }
 
 function x(s){if(!s)return '';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
